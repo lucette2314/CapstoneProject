@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const config = require('./../config');
 
-const Drinks = config.define('drinks', { //config.define(nombre de la tabla creada en heidi)
+const Reviews = config.define('reviews', { //config.define(nombre de la tabla creada en heidi)
     
     id: {
         type: Sequelize.INTEGER,
@@ -9,28 +9,27 @@ const Drinks = config.define('drinks', { //config.define(nombre de la tabla crea
         allowNull: false,
         primaryKey: true
     },
-    name: {
+    first_name: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    drink_category: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        foreignKey: true
-    },
-    description: {
+    last_name: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    price: {
-        type: Sequelize.FLOAT,
+    date: {
+        type: Sequelize.DATE,
         allowNull: false,
     },
-    // image: {
-    //     type: Sequelize.,
-    //     allowNull: false,
-    // },
+    rating: {
+        type: Sequelize.SMALLINT,
+        allowNull: false,
+    },
+    comments: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
 },{
     timestamps: false
 })
-module.exports = Drinks;
+module.exports = Reviews;
