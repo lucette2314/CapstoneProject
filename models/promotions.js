@@ -18,7 +18,7 @@ const Promotions = config.define('promotions', { //config.define(nombre de la ta
         allowNull: false,
     },
     discount: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL,
         allowNull: false,
     },
     valid_from: {
