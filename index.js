@@ -5,6 +5,8 @@ const cors = require('cors');
 const Food = require('./models/food');
 const Drink = require('./models/drink');
 const Promotion = require('./models/promotions');
+const FoodCategory = require('./models/food_categories.js');
+const DrinkCategory = require('./models/drink_categories.js');
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
@@ -76,6 +78,38 @@ app.post('/promotions', function (req, res) {
         })
 })
 
+app.post('/food_categories', function (req, res){
+    let foodCategory = req.body;
+    let foodCategoryInfo = {};
+
+    foodCategoryInfo.category = req.body.category;
+
+    console.log(foodCategory)
+    FoodCategory.create(foodCategory)
+    .then(function (results){
+        res.status(200).send(results);
+    })
+    .catch(function (error) {
+        res.status(500).send(error);
+    })
+})
+
+app.post('/drink_categories', function (req, res){
+    let drinkCategory = req.body;
+    let drinkCategoryInfo = {};
+
+    drinkCategoryInfo.category = req.body.category;
+
+    console.log(drinkCategory)
+    DrinkCategory.create(drinkCategory)
+    .then(function (results){
+        res.status(200).send(results);
+    })
+    .catch(function (error) {
+        res.status(500).send(error);
+    })
+})
+
 app.delete('/promotions/:promotions_id', function (req, res) {
 
     let promotions_id = parseInt(req.params.promotions_id);
@@ -119,6 +153,44 @@ app.delete('/foods/:foods_id', function (req, res) {
     let foods_id = parseInt(req.params.foods_id);
 
     Food.findByPk(foods_id)
+        .then(function (result) {
+
+            result.destroy()
+                .then(function (result) {
+                    res.status(200).send(result)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    res.status(500).send(error);
+                })
+        })
+
+})
+
+app.delete('/food_categories/:food_categories_id', function (req, res) {
+
+    let food_categories_id = parseInt(req.params.food_categories_id);
+
+    FoodCategory.findByPk(food_categories_id)
+        .then(function (result) {
+
+            result.destroy()
+                .then(function (result) {
+                    res.status(200).send(result)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    res.status(500).send(error);
+                })
+        })
+
+})
+
+app.delete('/drink_categories/:drink_categories_id', function (req, res) {
+
+    let drink_categories_id = parseInt(req.params.drink_categories_id);
+
+    FoodCategory.findByPk(drink_categories_id)
         .then(function (result) {
 
             result.destroy()
@@ -204,11 +276,49 @@ app.patch('/promotions/:promotions_id', function (req, res) {
                     res.status(500).send(error);
                 })
         })
+})
 
+app.patch('/food_categories/:food_categories_id', function (req, res) {
+    let food_categories_id = parseInt(req.params.food_categories_id);
 
+    FoodCategory.findByPk(food_categories_id)
+        .then(function (results) {
+            if (results) {
+                results.category = req.body.category;
+             
+            } else {
+                res.status(404).send("food category id is not found");
+            }
+            results.save() 
+                .then(function (result) {
+                    res.status(200).send(result)
+                })
+                .catch(function (error) {
+                    res.status(500).send(error);
+                })
+        })
 
+})
 
+app.patch('/drink_categories/:drink_categories_id', function (req, res) {
+    let drink_categories_id = parseInt(req.params.drink_categories_id);
 
+    DrinkCategory.findByPk(drink_categories_id)
+        .then(function (results) {
+            if (results) {
+                results.categories = req.body.categories;
+             
+            } else {
+                res.status(404).send("drink category id is not found");
+            }
+            results.save() 
+                .then(function (result) {
+                    res.status(200).send(result)
+                })
+                .catch(function (error) {
+                    res.status(500).send(error);
+                })
+        })
 
 })
 
@@ -237,6 +347,28 @@ app.get('/drinks', function (req, res) {
 app.get('/promotions', function (req, res) {
 
     Promotion.findAll()
+        .then(function (results) {
+            res.status(200).send(results);
+        })
+        .catch(function (error) {
+            res.status(500).send(error);
+        })
+})
+
+app.get('/food_categories', function (req, res) {
+
+    FoodCategory.findAll()
+        .then(function (results) {
+            res.status(200).send(results);
+        })
+        .catch(function (error) {
+            res.status(500).send(error);
+        })
+})
+
+app.get('/drink_categories', function (req, res) {
+
+    DrinkCategory.findAll()
         .then(function (results) {
             res.status(200).send(results);
         })
