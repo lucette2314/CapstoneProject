@@ -76,6 +76,176 @@ app.post('/promotions', function (req, res) {
         })
 })
 
+app.delete('/promotions/:promotions_id', function (req, res) {
+
+    let promotions_id = parseInt(req.params.promotions_id);
+
+    Promotion.findByPk(promotions_id)
+        .then(function (result) {
+
+            result.destroy()
+                .then(function (result) {
+                    res.status(200).send(result)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    res.status(500).send(error);
+                })
+        })
+
+})
+
+app.delete('/drinks/:drinks_id', function (req, res) {
+
+    let drinks_id = parseInt(req.params.drinks_id);
+
+    Drink.findByPk(drinks_id)
+        .then(function (result) {
+
+            result.destroy()
+                .then(function (result) {
+                    res.status(200).send(result)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    res.status(500).send(error);
+                })
+        })
+
+})
+
+app.delete('/foods/:foods_id', function (req, res) {
+
+    let foods_id = parseInt(req.params.foods_id);
+
+    Food.findByPk(foods_id)
+        .then(function (result) {
+
+            result.destroy()
+                .then(function (result) {
+                    res.status(200).send(result)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    res.status(500).send(error);
+                })
+        })
+
+})
+
+app.patch('/foods/:foods_id', function (req, res) {
+    let foods_id = parseInt(req.params.foods_id);
+
+    Food.findByPk(foods_id)
+        .then(function (results) {
+            if (results) {
+                // results.name = req.body.name;
+                // results.food_category = req.body.food_category;
+                // results.description = req.body.description;
+                results.price = parseFloat(req.body.price);
+
+            } else {
+                res.status(404).send("food id is not found");
+            }
+            results.save() //update sql command against the database
+                .then(function (result) {
+                    res.status(200).send(result)
+                })
+                .catch(function (error) {
+                    res.status(500).send(error);
+                })
+        })
+
+})
+
+app.patch('/drinks/:drinks_id', function (req, res) {
+    let drinks_id = parseInt(req.params.drinks_id);
+
+    Drink.findByPk(drinks_id)
+        .then(function (results) {
+            if (results) {
+                // results.name = req.body.name;
+                // results.drink_category = req.body.drink_category;
+                // results.description = req.body.description;
+                results.price = parseFloat(req.body.price);
+
+            } else {
+                res.status(404).send("drink id is not found");
+            }
+            results.save() //update sql command against the database
+                .then(function (result) {
+                    res.status(200).send(result)
+                })
+                .catch(function (error) {
+                    res.status(500).send(error);
+                })
+        })
+
+})
+
+app.patch('/promotions/:promotions_id', function (req, res) {
+    let promotions_id = parseInt(req.params.promotions_id);
+
+    Promotion.findByPk(promotions_id)
+        .then(function (results) {
+            if (results) {
+                results.discount = parseFloat (req.body.discount);
+                results.valid_from = req.body.valid_from;
+                results.valid_to = req.body.valid_to;
+
+            } else {
+                res.status(404).send("promotion id is not found");
+            }
+            results.save() //update sql command against the database
+                .then(function (result) {
+                    res.status(200).send(result)
+                })
+                .catch(function (error) {
+                    res.status(500).send(error);
+                })
+        })
+
+
+
+
+
+
+})
+
+app.get('/foods', function (req, res) {
+
+    Food.findAll()
+        .then(function (results) {
+            res.status(200).send(results);
+        })
+        .catch(function (error) {
+            res.status(500).send(error);
+        })
+})
+
+app.get('/drinks', function (req, res) {
+
+    Drink.findAll()
+        .then(function (results) {
+            res.status(200).send(results);
+        })
+        .catch(function (error) {
+            res.status(500).send(error);
+        })
+})
+
+app.get('/promotions', function (req, res) {
+
+    Promotion.findAll()
+        .then(function (results) {
+            res.status(200).send(results);
+        })
+        .catch(function (error) {
+            res.status(500).send(error);
+        })
+})
+
+
 
 
 
