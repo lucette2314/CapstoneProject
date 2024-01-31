@@ -190,7 +190,7 @@ app.delete('/drink_categories/:drink_categories_id', function (req, res) {
 
     let drink_categories_id = parseInt(req.params.drink_categories_id);
 
-    FoodCategory.findByPk(drink_categories_id)
+    DrinkCategory.findByPk(drink_categories_id)
         .then(function (result) {
 
             result.destroy()
@@ -306,7 +306,7 @@ app.patch('/drink_categories/:drink_categories_id', function (req, res) {
     DrinkCategory.findByPk(drink_categories_id)
         .then(function (results) {
             if (results) {
-                results.categories = req.body.categories;
+                results.category = req.body.category;
              
             } else {
                 res.status(404).send("drink category id is not found");
