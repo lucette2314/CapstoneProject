@@ -13,7 +13,7 @@ const Foods = config.define('foods', { //config.define(nombre de la tabla creada
         type: Sequelize.STRING,
         allowNull: false,
     },
-    food_category: {
+    food_category_id: {
         type: Sequelize.STRING,
         allowNull: false,
         foreignKey: true
