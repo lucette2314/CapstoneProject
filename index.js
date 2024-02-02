@@ -11,6 +11,7 @@ const DrinkCategory = require('./models/drink_categories.js');
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
+app.use('/images', express.static('uploads_images'));
 
 config.authenticate()
     .then(function () {
