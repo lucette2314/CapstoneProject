@@ -1,0 +1,3 @@
+<div *ngFor= "let foodItem of foods">
+    <app-food [food]= foodItem (deleteEvent)="deleteFood($event)"></app-food>
+</div>
