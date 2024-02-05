@@ -13,11 +13,6 @@ const Foods = config.define('foods', { //config.define(nombre de la tabla creada
         type: Sequelize.STRING,
         allowNull: false,
     },
-    food_category_id: {
-        type: Sequelize.NUMBER,
-        allowNull: false,
-        foreignKey: true
-    },
     description: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -26,6 +21,11 @@ const Foods = config.define('foods', { //config.define(nombre de la tabla creada
         type: Sequelize.FLOAT,
         allowNull: false,
     },
+    food_category_id: {
+        type: Sequelize.INTEGER,
+        foreignKey: true
+    }
+   
     // image: {
     //     type: Sequelize.,
     //     allowNull: false,
