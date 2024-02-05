@@ -3,11 +3,12 @@ import { Ifood } from '../../interfaces/ifood';
 import { CommonModule } from '@angular/common';
 import { FoodComponent } from '../food/food.component';
 import { FoodsService } from '../../services/foods.service';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-foods',
   standalone: true,
-  imports: [CommonModule, FoodComponent],
+  imports: [CommonModule, FoodComponent, RouterLink, RouterOutlet],
   templateUrl: './foods.component.html',
   styleUrl: './foods.component.css'
 })
@@ -25,6 +26,10 @@ deleteFood(foodId: number){
   });
 
   this.foods.splice(index,1);
+
+this.foodsService.deleteFood(foodId).subscribe(result => {
+  alert('Food item was deleted successfully');
+});
 }
 }
 

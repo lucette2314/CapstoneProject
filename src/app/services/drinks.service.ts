@@ -15,4 +15,13 @@ export class DrinksService {
   createDrink(formData: any){
       return this.http.post<Idrink>('http://localhost:3000/drinks', formData);
 }
+getDrink(drinkId: number){
+  return this.http.get<Idrink>(`http://localhost:3000/drinks/${drinkId}`)
+}
+updateDrink(drinkId: number, formData: any){
+  return this.http.patch<Idrink>(`http://localhost:3000/drinks/${drinkId}`,formData)
+}
+deleteDrink(drinkId: number){
+  return this.http.delete<Idrink>(`http://localhost:3000/drinks/${drinkId}`);
+}
 }

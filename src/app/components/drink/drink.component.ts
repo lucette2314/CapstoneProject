@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Idrink } from '../../interfaces/idrink';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -12,4 +12,10 @@ import { CommonModule } from '@angular/common';
 })
 export class DrinkComponent {
   @Input() drink!: Idrink
+  @Output() deleteEvent = new EventEmitter();
+
+  onDelete(){
+    if(confirm("Are you sure you want to delete this drink item?")){
+this.deleteEvent.emit(this.drink.id);
+  }}
 }

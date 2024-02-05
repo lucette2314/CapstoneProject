@@ -17,7 +17,8 @@ export class FoodComponent {
 @Output() deleteEvent = new EventEmitter();
 
   onDelete(){
-this.deleteEvent.emit(this.food.id)
-  }
+    if(confirm("Are you sure you want to delete this food item?")){
+this.deleteEvent.emit(this.food.id);
+  }}
 }
 

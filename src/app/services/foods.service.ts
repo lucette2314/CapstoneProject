@@ -20,4 +20,7 @@ export class FoodsService {
   getFood(foodId: number){
     return this.http.get<Ifood>(`http://localhost:3000/foods/${foodId}`);
   }
+  deleteFood(foodId: number){
+    return this.http.delete<Ifood>(`http://localhost:3000/foods/${foodId}`);
+  }
 }

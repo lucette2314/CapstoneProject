@@ -15,4 +15,7 @@ export class OffersService {
   createOffer(formData: any){
     return this.http.post<Ioffer>('http://localhost:3000/promotions', formData);
 }
+deleteOffer(offerId: number){
+  return this.http.delete<Ioffer>(`http://localhost:3000/promotions/${offerId}`);
+}
 }

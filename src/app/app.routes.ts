@@ -24,6 +24,8 @@ export const routes: Routes = [
     {path: 'adddrink', component: DrinksformComponent},
     {path: 'addoffer', component: OffersformComponent},
     {path: 'editfood/:food_id', component: FoodformComponent},
+    {path: 'editdrink/:drink_id', component: DrinksformComponent},
+    {path: 'editoffer/:offer_id', component: OffersformComponent},
     {path: '**', component: NotfoundComponent}
 
 ];

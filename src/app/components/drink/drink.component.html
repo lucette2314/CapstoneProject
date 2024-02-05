@@ -11,13 +11,12 @@
       <li class="list-group-item"> Category ID {{ drink.drink_category_id }}</li>
     </ul>
     <div class="card-body">
-      <a href="#" class="btn btn-primary">Edit</a>
-      <a href="#" class="btn btn-danger">Delete</a>
+      <a href="#" class="btn btn-primary me-2" [routerLink]="['/editdrink', drink.id]">Edit</a>
+      <a href="#" class="btn btn-danger" (click)="onDelete()">Delete</a>
     </div>
   </div>
 
   </div>
   </div>
-<button type="button" class="btn btn-success" routerLink="/adddrink">Add</button>
 
 <router-outlet></router-outlet>
