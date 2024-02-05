@@ -13,16 +13,20 @@ import { callOutline, callSharp, starOutline, starSharp, pricetagOutline, pricet
   imports: [ RouterLink, RouterLinkActive, CommonModule, IonApp, IonSplitPane, IonMenu, IonContent, IonList, IonListHeader, IonNote, IonMenuToggle, IonItem, IonIcon, IonLabel, IonRouterOutlet],
 })
 export class AppComponent {
+  
+  public pageTitle: string = "Restaurant";
+
   public appPages = [
     { title: 'About Us', url: '/aboutus', icon: 'people-circle' },
-    { title: 'Food', url: '/folder/Food', icon: 'fast-food' },
+    { title: 'Food', url: '/food', icon: 'fast-food' },
     { title: 'Drinks', url: '/drink', icon: 'beer' },
-    { title: 'Offers "Just for U"', url: '/folder/Offers "Just for U"', icon: 'pricetag' },
-    { title: 'Tell us How we did!!', url: '/folder/Tell us How we did!!', icon: 'star' },
-    { title: 'Contact us', url: '/folder/Contact us', icon: 'call' },
+    { title: 'Offers "Just for U"', url: '/offers', icon: 'pricetag' },
+    { title: 'Tell us How we did!!', url: '/reviews', icon: 'star' },
+    { title: 'Contact us', url: '/contactus', icon: 'call' },
   ];
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor() {
+    
     addIcons({ callOutline, callSharp, starOutline, starSharp, pricetagOutline, pricetagSharp, fastFoodOutline, fastFoodSharp, beerSharp, beerOutline, peopleCircleSharp, peopleCircleOutline, });
   }
 }

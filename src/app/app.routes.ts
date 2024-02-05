@@ -5,7 +5,7 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'folder/inbox',
     pathMatch: 'full',
-  },
+  },  
   {
     path: 'folder/:id',
     loadComponent: () =>
@@ -22,8 +22,23 @@ export const routes: Routes = [
     import('./components/drink/drink.component').then((m) => m.DrinkComponent),
   },
   {
-    path: '',
-    redirectTo: 'aboutus',
-    pathMatch: 'full',
-  }
+    path: 'food',
+    loadComponent: () =>
+    import('./components/food/food.component').then((m) => m.FoodComponent),
+  },
+  {
+    path: 'offers',
+    loadComponent: () =>
+    import('./components/offers/offers.component').then((m) => m.OffersComponent),
+  },
+  {
+    path: 'reviews',
+    loadComponent: () =>
+    import('./components/reviews/reviews.component').then((m) => m.ReviewsComponent),
+  },
+  {
+    path: 'contactus',
+    loadComponent: () =>
+    import('./components/contactus/contactus.component').then((m) => m.ContactusComponent),
+  },
 ];
