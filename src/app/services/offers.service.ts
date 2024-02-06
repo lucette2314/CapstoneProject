@@ -13,8 +13,14 @@ export class OffersService {
     return this.http.get<Ioffer[]>('http://localhost:3000/promotions')
   }
   createOffer(formData: any){
-    return this.http.post<Ioffer>('http://localhost:3000/promotions', formData);
-}
+    return this.http.post<Ioffer>('http://localhost:3000/promotions', formData);}
+
+  getOffer(offerId: number){
+      return this.http.get<Ioffer>(`http://localhost:3000/promotions/${offerId}`)
+    }
+  updateOffer(offerId: number, formData: any){
+      return this.http.patch<Ioffer>(`http://localhost:3000/promotions/${offerId}`,formData)
+    }
 deleteOffer(offerId: number){
   return this.http.delete<Ioffer>(`http://localhost:3000/promotions/${offerId}`);
 }

@@ -7,5 +7,4 @@ export interface Ifood {
     description: String;
     price: Number
     food_category_id: Number;
-    foodcategory?: Ifoodcategory
 }
