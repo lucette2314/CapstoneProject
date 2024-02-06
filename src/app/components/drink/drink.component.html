@@ -1,6 +1,48 @@
-<app-header pageTitle="Drinks"></app-header>
+<app-header pageTitle="Food Menu"></app-header>
 
 <ion-content [fullscreen]="true">
 
+  <div *ngFor="let drink of drinks">
+
+    <ion-card class="menu-item">
+      <ion-card-header>
+        <ion-card-title>{{ drink.name }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+          <ion-label>Description:</ion-label>
+          <h2>{{ drink.description }}</h2>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="cash-outline" slot="start"></ion-icon>
+          <ion-label>Price:</ion-label>
+          <h2>{{ drink.price | currency:'USD':'symbol':'1.2-2' }}</h2>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon slot="start"></ion-icon>
+          <ion-label>Category:</ion-label>
+          <h2>{{ drink.drink_category_id }}</h2>
+        </ion-item>
+      </ion-card-content>
+
+      <!-- You can add buttons for actions if needed -->
+      <!-- <ion-button slot="end" expand="full" fill="outline" (click)="deleteFood(food.id)">
+        Delete
+        <ion-icon slot="end" name="trash-outline"></ion-icon>
+      </ion-button> -->
+
+      <!-- If you have a specific route for editing, you can uncomment and modify this button -->
+      <!-- <ion-button expand="full" fill="outline" [routerLink]="['/tabs/tab2', task.id]">
+        Edit
+        <ion-icon slot="end" name="create"></ion-icon>
+      </ion-button> -->
+
+    </ion-card>
+
+  </div>
 
 </ion-content>
