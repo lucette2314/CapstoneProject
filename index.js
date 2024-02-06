@@ -7,11 +7,13 @@ const Drink = require('./models/drink');
 const Promotion = require('./models/promotions');
 const FoodCategory = require('./models/food_categories.js');
 const DrinkCategory = require('./models/drink_categories.js');
+const FoodCategories = require('./models/food_categories.js');
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
 app.use('/images', express.static('uploads_images'));
+
 
 config.authenticate()
     .then(function () {
@@ -212,9 +214,9 @@ app.patch('/foods/:foods_id', function (req, res) {
     Food.findByPk(foods_id)
         .then(function (results) {
             if (results) {
-                // results.name = req.body.name;
-                // results.food_category = req.body.food_category;
-                // results.description = req.body.description;
+                results.name = req.body.name;
+                results.food_category_id = parseFloat(req.body.food_category_id);
+                results.description = req.body.description;
                 results.price = parseFloat(req.body.price);
 
             } else {
@@ -237,9 +239,9 @@ app.patch('/drinks/:drinks_id', function (req, res) {
     Drink.findByPk(drinks_id)
         .then(function (results) {
             if (results) {
-                // results.name = req.body.name;
-                // results.drink_category = req.body.drink_category;
-                // results.description = req.body.description;
+                results.name = req.body.name;
+                results.drink_category_id = parseFloat(req.body.drink_category_id);
+                results.description = req.body.description;
                 results.price = parseFloat(req.body.price);
 
             } else {
@@ -262,6 +264,8 @@ app.patch('/promotions/:promotions_id', function (req, res) {
     Promotion.findByPk(promotions_id)
         .then(function (results) {
             if (results) {
+                results.title = req.body.title;
+                results.description = req.body.description;
                 results.discount = parseFloat (req.body.discount);
                 results.valid_from = req.body.valid_from;
                 results.valid_to = req.body.valid_to;
@@ -324,14 +328,30 @@ app.patch('/drink_categories/:drink_categories_id', function (req, res) {
 })
 
 app.get('/foods', function (req, res) {
-
-    Food.findAll()
-        .then(function (results) {
+   
+    Food.findAll(data)
+      .then(function (results) {
             res.status(200).send(results);
+      })
+       .catch(function (error) {
+          res.status(500).send(error);
         })
-        .catch(function (error) {
-            res.status(500).send(error);
-        })
+})
+
+app.get('/foods/:foodId', function (req,res){
+    let foodId= parseInt(req.params.foodId);
+
+    Food.findByPk(foodId)
+    .then(function(results){
+        if(results){
+            res.status(200).send(results);
+        }else{
+            res.status(404).send("The food ID does not exist");
+        }
+    })
+    .catch(function(error){
+        res.status(500).send(error);
+    })
 })
 
 app.get('/drinks', function (req, res) {
@@ -345,6 +365,22 @@ app.get('/drinks', function (req, res) {
         })
 })
 
+app.get('/drinks/:drinkId', function (req,res){
+    let drinkId= parseInt(req.params.drinkId);
+
+    Drink.findByPk(drinkId)
+    .then(function(results){
+        if(results){
+            res.status(200).send(results);
+        }else{
+            res.status(404).send("The drink ID does not exist");
+        }
+    })
+    .catch(function(error){
+        res.status(500).send(error);
+    })
+})
+
 app.get('/promotions', function (req, res) {
 
     Promotion.findAll()
@@ -355,6 +391,23 @@ app.get('/promotions', function (req, res) {
             res.status(500).send(error);
         })
 })
+
+app.get('/promotions/:offerId', function (req,res){
+    let offerId= parseInt(req.params.offerId);
+
+    Promotion.findByPk(offerId)
+    .then(function(results){
+        if(results){
+            res.status(200).send(results);
+        }else{
+            res.status(404).send("The offer ID does not exist");
+        }
+    })
+    .catch(function(error){
+        res.status(500).send(error);
+    })
+})
+
 
 app.get('/food_categories', function (req, res) {
 
