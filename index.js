@@ -12,7 +12,7 @@ const FoodCategories = require('./models/food_categories.js');
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
-app.use('/images', express.static('uploads_images'));
+app.use('/uploads', express.static('uploads'));
 
 
 config.authenticate()

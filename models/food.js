@@ -24,6 +24,9 @@ const Foods = config.define('foods', { //config.define(nombre de la tabla creada
     food_category_id: {
         type: Sequelize.NUMBER,
         foreignKey: true
+    },
+    image: {
+        type: Sequelize.STRING,
     }
    
     // image: {
