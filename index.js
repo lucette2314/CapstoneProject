@@ -329,7 +329,7 @@ app.patch('/drink_categories/:drink_categories_id', function (req, res) {
 
 app.get('/foods', function (req, res) {
    
-    Food.findAll(data)
+    Food.findAll()
       .then(function (results) {
             res.status(200).send(results);
       })
