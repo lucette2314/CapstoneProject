@@ -2,5 +2,48 @@
 
 <ion-content [fullscreen]="true">
 
-
-</ion-content>
+    <form [formGroup]="reviewForm">
+      
+      <!-- First Name -->
+      <ion-item>
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input formControlName="first_name" type="text"></ion-input>
+      </ion-item>
+  
+      <!-- Last Name -->
+      <ion-item>
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input formControlName="last_name" type="text"></ion-input>
+      </ion-item>
+  
+      <!-- Date -->
+      <ion-item>
+        <ion-label position="floating">Date</ion-label>
+        <ion-input formControlName="date" type="date"></ion-input>
+      </ion-item>
+  
+      <!-- Rating -->
+      <ion-item>
+        <ion-label position="floating">Rating</ion-label>
+        <ion-select formControlName="rating">
+          <ion-select-option value="5">5 - Excellent</ion-select-option>
+          <ion-select-option value="4">4 - Very Good</ion-select-option>
+          <ion-select-option value="3">3 - Good</ion-select-option>
+          <ion-select-option value="2">2 - Fair</ion-select-option>
+          <ion-select-option value="1">1 - Poor</ion-select-option>
+        </ion-select>
+      </ion-item>
+  
+      <!-- Comments -->
+      <ion-item>
+        <ion-label position="floating">Comments</ion-label>
+        <ion-textarea formControlName="comments" rows="4"></ion-textarea>
+      </ion-item>
+  
+      <!-- Submit Button -->
+      <ion-button fill="outline" class="submit" (click)="onSubmit()">Submit</ion-button>
+  
+    </form>
+  
+  </ion-content>
+  

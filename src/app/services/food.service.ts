@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Ifood } from '../interfaces/ifood';
+import { Ifoodcategory } from '../interfaces/ifoodcategory';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,8 @@ export class FoodService {
   // }
   updateFood(food_id:number, formData: any){
     return this.http.patch<Ifood>(`http://localhost:3000/foods/${food_id}`, formData);
+  }
+  getFoodCategories() {
+    return this.http.get<Ifoodcategory[]>('http://localhost:3000/foodcategories');
   }
 }
