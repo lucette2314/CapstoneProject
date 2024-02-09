@@ -8,11 +8,12 @@ const Promotion = require('./models/promotions');
 const FoodCategory = require('./models/food_categories.js');
 const DrinkCategory = require('./models/drink_categories.js');
 const Review = require('./models/reviews.js');
+const EmployeeLogin = require('./models/employee_login.js');
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
-app.use('/images', express.static('uploads_images'));
+app.use('/uploads', express.static('uploads'));
 
 config.authenticate()
     .then(function () {
@@ -21,6 +22,24 @@ config.authenticate()
     .catch(function (error) {
         console.log(error)
     })
+
+app.post('/employee_login', function (req, res) {
+    let employee_login = req.body;
+    let employee_loginInfo = {};
+
+    employee_loginInfo.email = req.body.email;
+    employee_loginInfo.password = req.body.password;
+    employee_loginInfo.image = req.body.image;
+
+    console.log(employee_login)
+    EmployeeLogin.create(employee_login) //insert into () value
+        .then(function (results) {
+            res.status(200).send(results);
+        })
+        .catch(function (error) {
+            res.status(500).send(error);
+        })
+})
 
 app.post('/foods', function (req, res) {
     let food = req.body;
@@ -378,6 +397,7 @@ app.get('/drink_categories', function (req, res) {
             res.status(500).send(error);
         })
 })
+
 
 
 

@@ -23,14 +23,14 @@ const Foods = config.define('foods', { //config.define(nombre de la tabla creada
     },
     food_category_id: {
         type: Sequelize.INTEGER,
-        foreignKey: true
-    }
-   
-    // image: {
-    //     type: Sequelize.,
-    //     allowNull: false,
-    // },
-},{
-    timestamps: false
-})
+        foreignKey: true,
+    },
+    image: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+},
+
+    { timestamps: false });
+
 module.exports = Foods;
