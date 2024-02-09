@@ -26,11 +26,12 @@ const Drinks = config.define('drinks', { //config.define(nombre de la tabla crea
         type: Sequelize.FLOAT,
         allowNull: false,
     },
-    // image: {
-    //     type: Sequelize.,
-    //     allowNull: false,
-    // },
-},{
-    timestamps: false
-})
+    image: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+},
+
+    { timestamps: false });
+    
 module.exports = Drinks;

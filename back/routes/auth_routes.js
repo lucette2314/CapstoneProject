@@ -69,4 +69,12 @@ router.post('/addfood', upload.single('food_image'), function(req,res){
     }
 })
 
-
+var upload = multer({storage: storage});
+ 
+router.post('/adddrink', upload.single('drink_image'), function(req,res){
+    const drinkData = req.body;
+ 
+    if(req.file){
+        drinkData.image = req.file.filename;
+    }
+})
