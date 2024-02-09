@@ -1,6 +1,32 @@
 <app-header pageTitle="Contact us"></app-header>
 
-<ion-content [fullscreen]="true">
-
-
-</ion-content>
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+      <ion-title>Mail</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content [fullscreen]="true">
+    <ion-list>
+      <ion-item>
+        <ion-label position="fixed">To:</ion-label>
+        <ion-input [(ngModel)]="emailOptions.to" helperText="Enter a valid email" errorText="Invalid email" id="to" placeholder="Enter Recepient Email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="fixed">CC:</ion-label>
+        <ion-input [(ngModel)]="emailOptions.cc" helperText="Enter a valid email" errorText="Invalid email" id="cc" placeholder="Enter CC"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="fixed">BCC:</ion-label>
+        <ion-input [(ngModel)]="emailOptions.bcc" helperText="Enter a valid email" errorText="Invalid email" id="bcc" placeholder="Enter BCC"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="fixed">Subject:</ion-label>
+        <ion-input [(ngModel)]="emailOptions.subject" helperText="You must enter a subject" errorText="Invalid email" id="subject" placeholder="Subject"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-textarea [(ngModel)]="emailOptions.body" [autoGrow]="true" label="Body:" placeholder="Enter the body of the message"></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-button expand="full" (click)="openEmail()">Open Email</ion-button>
+  </ion-content>
+  

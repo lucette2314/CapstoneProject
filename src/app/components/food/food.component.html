@@ -4,14 +4,20 @@
 
   <div *ngFor="let food of foods">
 
-
       <ion-card color="light">
+        
+        <div>
+          <img [src]="'http://localhost:3000/uploads/' + food.image"> 
+      </div>
+
         <ion-card-header>
           <ion-card-title>{{ food.name }}</ion-card-title>
-          <ion-card-subtitle class="caterogy">{{ food.food_category_id }}</ion-card-subtitle>
+          <ion-card-subtitle class="caterogy">{{ getCategoryName(food.food_category_id) }}</ion-card-subtitle>
           <ion-card-subtitle class="description">{{ food.description }}</ion-card-subtitle>
           <ion-card-subtitle class="price">{{ food.price | currency:'USD':'symbol':'1.2-2' }}</ion-card-subtitle>
-         
+          <div class="mb-3">
+          
+        </div>
         </ion-card-header>
         <ion-button class="cart" color="medium" (click)="presentAlert()">Add to Cart</ion-button>
         <hr>

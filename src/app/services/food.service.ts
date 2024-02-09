@@ -19,13 +19,14 @@ export class FoodService {
   createFood(formData: any){
     return this.http.post<Ifood>('http://localhost:3000/foods', formData);
   }
-  // getFood(food_id: number){
-  //   return this.http.get<Ifood>(`http://localhost:3000/foods/${food_id}`);
-  // }
+
   updateFood(food_id:number, formData: any){
     return this.http.patch<Ifood>(`http://localhost:3000/foods/${food_id}`, formData);
   }
   getFoodCategories() {
     return this.http.get<Ifoodcategory[]>('http://localhost:3000/foodcategories');
+  }
+  getProfile(){
+    return this.http.get<Ifood>('http://localhost:3000/foods/profile');
   }
 }

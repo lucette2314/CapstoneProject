@@ -4,4 +4,5 @@ export interface Ifood {
     description: string,
     price: number,
     food_category_id: number,
+    image: string,
 }
