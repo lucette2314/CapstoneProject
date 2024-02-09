@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const config = require('./../config');
-
-const EmployeeLogin = config.define('employee_logins', { //config.define(nombre de la tabla creada en heidi)
+ 
+const employee_login = config.define('employee_login', { //config.define(nombre de la tabla creada en heidi)
     
     id: {
         type: Sequelize.INTEGER,
@@ -17,11 +17,14 @@ const EmployeeLogin = config.define('employee_logins', { //config.define(nombre 
         type: Sequelize.STRING,
         allowNull: false,
     },
-    image: {
+    first_name: {
         type: Sequelize.STRING,
         allowNull: false,
-    },   
+    },
+    last_name: {type: Sequelize.STRING,
+        allowNUll: false,
+    }
 },{
     timestamps: false
-})
-module.exports = EmployeeLogin;
+});
+module.exports = employee_login;

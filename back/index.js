@@ -9,11 +9,14 @@ const FoodCategory = require('./models/food_categories.js');
 const DrinkCategory = require('./models/drink_categories.js');
 const Review = require('./models/reviews.js');
 const EmployeeLogin = require('./models/employee_login.js');
+const authRoutes = require('./routes/auth_routes.js'); 
+
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
 app.use('/uploads', express.static('uploads'));
+// app.use ('/auth', authRoutes);
 
 config.authenticate()
     .then(function () {
