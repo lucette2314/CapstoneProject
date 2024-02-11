@@ -7,17 +7,8 @@ const multer = require('multer');
  
 router.post('/register', function(req,res){
     const userData = req.body;
- 
-    var storage = multer.diskStorage({
-      destination: function (req, file, cb) {
-        cb(null, './uploads')
-      },
-      filename: function (req, file, cb) {
-        cb(null, file.originalname)
-      }
-    });
-    
-bcrypt.hash(userData.password, 10, (err, hash) => {
+
+    bcrypt.hash(userData.password, 10, (err, hash) => {
     userData.password = hash;
  
     User.create(userData).then((result) => {
@@ -27,7 +18,7 @@ bcrypt.hash(userData.password, 10, (err, hash) => {
     });
 });
 });
- 
+
 router.post('/login', function(req, res){
     const {email, password} = req.body;
  
@@ -48,16 +39,17 @@ router.post('/login', function(req, res){
     });
 });
  
+    var storage = multer.diskStorage({
+      destination: function (req, file, cb) {
+        cb(null, './uploads')
+      },
+      filename: function (req, file, cb) {
+        cb(null, file.originalname)
+      }
+    });
+ 
 module.exports = router;
  
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './uploads')},
-        filename: function (req, file, cb) {
-            cb (null, file.originalname)
-        }
-    }
-);
  
 var upload = multer({storage: storage});
  

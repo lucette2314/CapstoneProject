@@ -9,14 +9,14 @@ const FoodCategory = require('./models/food_categories.js');
 const DrinkCategory = require('./models/drink_categories.js');
 const Review = require('./models/reviews.js');
 const EmployeeLogin = require('./models/employee_login.js');
-const authRoutes = require('./routes/auth_routes.js'); 
+const authRoutes = require('./routes/auth_routes'); 
 
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json())
+app.use('/auth', authRoutes);
 app.use('/uploads', express.static('uploads'));
-// app.use ('/auth', authRoutes);
 
 config.authenticate()
     .then(function () {
@@ -32,7 +32,7 @@ app.post('/employee_login', function (req, res) {
 
     employee_loginInfo.email = req.body.email;
     employee_loginInfo.password = req.body.password;
-    employee_loginInfo.image = req.body.image;
+
 
     console.log(employee_login)
     EmployeeLogin.create(employee_login) //insert into () value

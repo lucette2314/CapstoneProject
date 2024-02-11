@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const config = require('./../config');
  
-const employee_login = config.define('employee_login', { //config.define(nombre de la tabla creada en heidi)
+const User = config.define('employee_logins', { //config.define(nombre de la tabla creada en heidi)
     
     id: {
         type: Sequelize.INTEGER,
@@ -27,4 +27,4 @@ const employee_login = config.define('employee_login', { //config.define(nombre 
 },{
     timestamps: false
 });
-module.exports = employee_login;
+module.exports = User;
