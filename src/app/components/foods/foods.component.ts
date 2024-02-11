@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { FoodComponent } from '../food/food.component';
 import { FoodsService } from '../../services/foods.service';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-foods',
   standalone: true,
-  imports: [CommonModule, FoodComponent, RouterLink, RouterOutlet],
+  imports: [CommonModule, FoodComponent, RouterLink, RouterOutlet, HomeComponent],
   templateUrl: './foods.component.html',
   styleUrl: './foods.component.css'
 })

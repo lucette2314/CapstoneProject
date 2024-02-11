@@ -16,6 +16,10 @@
         <label for="foodcategoryid" class="form-label">Category ID #</label>
         <input type="number" formControlName="food_category_id" class="form-control">
     </div>
+    <div class="mb-3">
+      <label for="image" class="form-label">Image</label>
+      <input type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg, image/jpg">
+  </div>
     
     <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
   </form>

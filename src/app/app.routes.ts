@@ -10,10 +10,15 @@ import { FoodformComponent } from './components/foodform/foodform.component';
 import { DrinksformComponent } from './components/drinksform/drinksform.component';
 import { OffersformComponent } from './components/offersform/offersform.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './components/home/home.component';
+import { RegisterpageComponent } from './components/registerpage/registerpage.component';
 
 
 export const routes: Routes = [
-    {path: '', component: LoginpageComponent},
+    {path: '', component: HomeComponent},
+    {path: 'login', component: LoginpageComponent},
+    {path: 'auth/register', component: RegisterpageComponent},
     {path: 'food', component: FoodComponent},
     {path: 'foods', component: FoodsComponent},
     {path: 'drink', component: DrinkComponent},

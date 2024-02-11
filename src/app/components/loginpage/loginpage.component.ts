@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { avoidWord } from '../../customvalidation';
+import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-loginpage',
@@ -14,14 +16,25 @@ import { avoidWord } from '../../customvalidation';
 export class LoginpageComponent {
   loginForm: FormGroup
 
-  constructor(private formBuilder: FormBuilder){
+  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService){
     this.loginForm = formBuilder.group({
       email: ['',[Validators.required, Validators.email, avoidWord]],
       password: ['', [Validators.required, Validators.minLength(8), avoidWord]]
     });
   }
-onLogin(){
-  console.log(this.loginForm.value);
+
+Login(){
+  this.userService.loginUser(this.loginForm.value).subscribe({
+    next: (result) => {
+      localStorage.setItem('auth_token', result.token);
+      alert('Login was successful');
+      this.router.navigate(['/home']);
+    },
+    error: (err) => {
+console.log(err);
+alert('Login failed');
+    }
+  })
 }
 
 get emailFormControl(){
