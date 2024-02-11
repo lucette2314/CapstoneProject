@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Idrink } from '../interfaces/idrink';
 import { HttpClient } from '@angular/common/http';
+import { Idrinkcategory } from '../interfaces/idrinkcategory';
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +20,13 @@ export class DrinkService {
   createDrinks(formData: any){
     return this.http.post<Idrink>('http://localhost:3000/drinks', formData);
   }
-  // getFood(drink_id: number){
-  //   return this.http.get<Ifood>(`http://localhost:3000/drinks/${food_id}`);
-  // }
   updateDrinks(drink_id:number, formData: any){
     return this.http.patch<Idrink>(`http://localhost:3000/drinks/${drink_id}`, formData);
+  }
+  getDrinkCategories() {
+    return this.http.get<Idrinkcategory[]>('http://localhost:3000/drinkcategories');
+  }
+  getProfile(){
+    return this.http.get<Idrink>('http://localhost:3000/foods/profile');
   }
 }

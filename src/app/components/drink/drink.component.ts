@@ -6,6 +6,9 @@ import { Idrink } from 'src/app/interfaces/idrink';
 import { DrinkService } from 'src/app/services/drink.service';
 import { CommonModule } from '@angular/common';
 import { AlertController } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { heartOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-drink',
@@ -15,8 +18,12 @@ import { AlertController } from '@ionic/angular/standalone';
   imports: [RouterLink, IonLabel, IonItem, IonContent, HeaderComponent, IonButton, IonCard, IonCardSubtitle, IonCardContent, IonIcon, CommonModule, IonCardHeader, IonCardTitle]
 })
 export class DrinkComponent  implements OnInit {
+  addIcons = { heartOutline };
 
+  drink: any;
   public drinks!: Idrink[];
+  profile!: Idrink;
+  profile_image!: File;
   public drinkcategories = [
     { id: 1, name: 'Non-Alcoholic Beverages' },
     { id: 2, name: 'Alcoholic Beverages' },
@@ -28,7 +35,12 @@ export class DrinkComponent  implements OnInit {
     this.getDrink();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.drinkService.getDrinks().subscribe((drinks: any[]) => {
+      this.drinks = drinks.map(drink => ({ ...drink, quantity: 1 }));
+    });
+  }
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -49,5 +61,26 @@ export class DrinkComponent  implements OnInit {
   getCategoryName(categoryId: number): string {
     const category = this.drinkcategories.find(cat => cat.id === categoryId);
     return category ? category.name : 'Unknown Category';
+  }  onFileSelected(event: any) {
+    this.profile_image = event.target.files[0];
   }
-}
+  register() {
+    let formData = new FormData();
+
+    if (this.profile_image) {
+        formData.append('profile_image', this.profile_image);
+    }
+
+    this.drinkService.getProfile().subscribe((result) => {
+        this.profile = result;
+    });
+  }
+    increaseQuantity(food: any) {
+      food.quantity += 1;
+    }
+  
+    decreaseQuantity(food: any) {
+      if (food.quantity > 1) {
+        food.quantity -= 1;
+      }
+}}

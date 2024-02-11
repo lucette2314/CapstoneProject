@@ -1,29 +1,30 @@
 <app-header pageTitle="Food Menu"></app-header>
 
-<ion-content [fullscreen]="true">
-
-  <div *ngFor="let food of foods">
-
-      <ion-card color="light">
-        
-        <div>
-          <img [src]="'http://localhost:3000/uploads/' + food.image"> 
+<ion-content class="ion-content-centered" [fullscreen]="true">
+  <div *ngFor="let food of foods" class="ion-card-container">
+    <ion-card style="height: auto;" color="light">
+      <div class="heart-icon">&#9825;</div>
+      <div class="image-container">
+        <img [src]="'http://localhost:3000/uploads/' + food.image" class="img-responsive rounded">
       </div>
-
-        <ion-card-header>
-          <ion-card-title>{{ food.name }}</ion-card-title>
-          <ion-card-subtitle class="caterogy">{{ getCategoryName(food.food_category_id) }}</ion-card-subtitle>
-          <ion-card-subtitle class="description">{{ food.description }}</ion-card-subtitle>
-          <ion-card-subtitle class="price">{{ food.price | currency:'USD':'symbol':'1.2-2' }}</ion-card-subtitle>
-          <div class="mb-3">
-          
-        </div>
-        </ion-card-header>
-        <ion-button class="cart" color="medium" (click)="presentAlert()">Add to Cart</ion-button>
+      <ion-card-header>
+        <ion-card-title>{{ food.name }}</ion-card-title>
+        <ion-card-subtitle class="category">{{ getCategoryName(food.food_category_id) }}</ion-card-subtitle>
+        <ion-card-subtitle class="description">{{ food.description }}</ion-card-subtitle>
         <hr>
-      
+        <div class="price-and-quantity">
+          <ion-card-subtitle class="price">{{ food.price | currency:'USD':'symbol':'1.2-2' }}</ion-card-subtitle>
+          <div class="quantity-controls">
+            <ion-button (click)="decreaseQuantity(food)" color="medium" class="menos" style="font-size: 12px; padding: 1px 1px;">-</ion-button>
+            <span class="textqty">{{ food.quantity }}</span>
+            <ion-button (click)="increaseQuantity(food)" color="medium" class="menos" style="font-size: 12px; padding: 1px 1px;">+</ion-button>
+          </div>
+        </div>
+        <hr>
+        <ion-button class="cart" color="medium" (click)="presentAlert()">Add to Cart</ion-button>
+      </ion-card-header>
     </ion-card>
-
   </div>
-
 </ion-content>
+
+

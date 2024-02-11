@@ -4,4 +4,6 @@ export interface Idrink {
     description: string,
     price: number,
     drink_category_id: number,
+    image: string,
+    quantity: number,
 }

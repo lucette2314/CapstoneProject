@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { IonLabel, IonItem, IonContent, IonIcon, IonButton, IonCardContent, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle} from '@ionic/angular/standalone';
+import { IonLabel, IonItem, IonContent, IonIcon, IonButton, IonCardContent, IonInput, IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle} from '@ionic/angular/standalone';
 import { HeaderComponent } from '../header/header.component';
 import { FoodService } from 'src/app/services/food.service';
 import { Ifood } from 'src/app/interfaces/ifood';
 import { Ifoodcategory } from 'src/app/interfaces/ifoodcategory';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { addIcons } from 'ionicons';
+import { heartOutline } from 'ionicons/icons';
 
 
 @Component({
@@ -15,10 +17,12 @@ import { Router } from '@angular/router';
   templateUrl: './food.component.html',
   styleUrls: ['./food.component.scss'],
   standalone: true,
-  imports: [RouterLink, IonLabel, IonItem, HeaderComponent, IonContent, IonIcon, IonButton, IonCardContent, IonCard, IonCardSubtitle, CommonModule, IonCardHeader, IonCardTitle], 
+  imports: [RouterLink, IonLabel, IonItem, HeaderComponent, IonContent, IonInput, IonIcon, IonButton, IonCardContent, IonCard, IonCardSubtitle, CommonModule, IonCardHeader, IonCardTitle], 
 })
 export class FoodComponent implements OnInit{
-
+ addIcons = { heartOutline};
+ 
+  food: any;
   public foods!: Ifood[];
   profile!: Ifood;
   profile_image!: File;
@@ -29,13 +33,20 @@ export class FoodComponent implements OnInit{
     { id: 4, name: 'Pasta' },
     { id: 5, name: 'Wings' },
     { id: 6, name: 'Steaks' },
-    { id: 7, name: 'Desserts' }
+    { id: 7, name: 'Desserts' },
+    { id: 8, name: 'Burgers' },
+
   ];
   constructor(private foodService: FoodService, private alertController: AlertController, private router: Router) { 
     this.getFood();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+    this.foodService.getFoods().subscribe((foods: any[]) => {
+      this.foods = foods.map(food => ({ ...food, quantity: 1 }));
+    });
+  }
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -69,4 +80,13 @@ export class FoodComponent implements OnInit{
     this.foodService.getProfile().subscribe((result) => {
         this.profile = result;
     });
+  }
+    increaseQuantity(food: any) {
+      food.quantity += 1;
+    }
+  
+    decreaseQuantity(food: any) {
+      if (food.quantity > 1) {
+        food.quantity -= 1;
+      }
 }}

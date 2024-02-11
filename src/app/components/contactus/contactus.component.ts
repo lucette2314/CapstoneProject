@@ -1,34 +1,44 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IonLabel, IonItem, IonContent, IonButton, IonTextarea, IonHeader, IonToolbar, IonTitle, IonInput, IonList} from '@ionic/angular/standalone';
+import { IonLabel, IonItem, IonContent, IonButton, IonTextarea, IonHeader, IonToolbar, IonTitle, IonInput, IonList, IonCard, IonCardContent} from '@ionic/angular/standalone';
 import { HeaderComponent } from '../header/header.component';
 import { CommonModule } from '@angular/common';
-import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-contactus',
   templateUrl: './contactus.component.html',
   styleUrls: ['./contactus.component.scss'],
   standalone: true,
-  providers: [EmailComposer],
-  imports: [RouterLink, IonicModule, FormsModule, IonLabel, IonItem, HeaderComponent, IonContent, IonButton, IonTextarea, IonHeader, IonToolbar, IonTitle, IonInput, CommonModule, IonList], 
+  imports: [RouterLink, FormsModule, IonLabel, IonItem, HeaderComponent, IonContent, IonButton, IonTextarea, IonHeader, IonToolbar, IonTitle, IonInput, CommonModule, IonList, IonCardContent, 
+            IonCard], 
 })
-export class ContactusComponent {
+export class ContactusComponent implements OnInit{
 
-  constructor(private emailComposer: EmailComposer) {}
+  name: string = "";
+  email: string = "";
+  message: string = "";
 
-  emailOptions = {to: '', cc: '', bcc: '', subject: '', body: ''};
-  async openEmail() {
-    const email = {
-      to: this.emailOptions.to,
-      cc: this.emailOptions.cc,
-      bcc: this.emailOptions.bcc,
-      subject: this.emailOptions.subject,
-      body: this.emailOptions.body
-    };
-    await this.emailComposer.open(email);
-    console.log('opened');
+  constructor() { }
+
+  ngOnInit() {}
+
+  sendMessage() {
+
+    // Implement your logic to send the message
+    console.log('Name:', this.name);
+    console.log('Email:', this.email);
+    console.log('Message:', this.message);
+
+    // Reset form fields after sending the message
+    this.resetForm();
+  }
+
+  resetForm() {
+    this.name = '';
+    this.email = '';
+    this.message = '';
   }
 }
+  

@@ -1,32 +1,39 @@
+<!-- contact-us.page.html -->
+
 <app-header pageTitle="Contact us"></app-header>
 
-<ion-header [translucent]="true">
-    <ion-toolbar color="primary">
-      <ion-title>Mail</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content [fullscreen]="true">
-    <ion-list>
-      <ion-item>
-        <ion-label position="fixed">To:</ion-label>
-        <ion-input [(ngModel)]="emailOptions.to" helperText="Enter a valid email" errorText="Invalid email" id="to" placeholder="Enter Recepient Email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="fixed">CC:</ion-label>
-        <ion-input [(ngModel)]="emailOptions.cc" helperText="Enter a valid email" errorText="Invalid email" id="cc" placeholder="Enter CC"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="fixed">BCC:</ion-label>
-        <ion-input [(ngModel)]="emailOptions.bcc" helperText="Enter a valid email" errorText="Invalid email" id="bcc" placeholder="Enter BCC"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="fixed">Subject:</ion-label>
-        <ion-input [(ngModel)]="emailOptions.subject" helperText="You must enter a subject" errorText="Invalid email" id="subject" placeholder="Subject"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-textarea [(ngModel)]="emailOptions.body" [autoGrow]="true" label="Body:" placeholder="Enter the body of the message"></ion-textarea>
-      </ion-item>
-    </ion-list>
-    <ion-button expand="full" (click)="openEmail()">Open Email</ion-button>
+<ion-content [fullscreen]="true">
+
+  <ion-content class="ion-padding">
+
+    <ion-card>
+      <ion-card-content>
+
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label position="stacked" class="input-label">First and Last Name</ion-label>
+            <hr>
+            <ion-input [(ngModel)]="name" type="text" required class="input-field"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked" class="input-label">Email address</ion-label>
+            <hr>
+            <ion-input [(ngModel)]="email" type="email" required class="input-field"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked" class="input-label">Message</ion-label>
+            <hr>
+            <ion-textarea [(ngModel)]="message" required class="textarea-field"></ion-textarea>
+          </ion-item>
+        </ion-list>
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-button expand="full" (click)="sendMessage()" class="send-button">Send Message</ion-button>
+
   </ion-content>
-  
+
+</ion-content>

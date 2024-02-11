@@ -5,4 +5,5 @@ export interface Ifood {
     price: number,
     food_category_id: number,
     image: string,
+    quantity: number;
 }
