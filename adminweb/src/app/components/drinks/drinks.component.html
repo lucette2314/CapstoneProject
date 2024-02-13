@@ -1,0 +1,5 @@
+<div *ngFor= "let drinkItem of drinks">
+    <app-drink [drink]= drinkItem (deleteEvent)="deleteDrink($event)"></app-drink>
+</div>
+<button type="button" class="btn btn-success" routerLink="/adddrink">Add</button>
+<router-outlet></router-outlet>

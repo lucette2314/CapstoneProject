@@ -23,8 +23,6 @@ const User = config.define('employee_logins', { //config.define(nombre de la tab
     },
     last_name: {type: Sequelize.STRING,
         allowNUll: false,
-    }
-},{
-    timestamps: false
-});
+    },
+}, {timestamps: false});
 module.exports = User;

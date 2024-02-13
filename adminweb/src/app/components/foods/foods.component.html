@@ -1,0 +1,5 @@
+<div *ngFor= "let foodItem of foods">
+    <app-food [food]= foodItem (deleteEvent)="deleteFood($event)"></app-food>
+</div>
+<button type="button" class="btn btn-success" routerLink="/addfood">Add</button>
+<router-outlet></router-outlet>

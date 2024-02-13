@@ -1,0 +1,5 @@
+<div *ngFor= "let offerItem of offers">
+    <app-offer [offer]= offerItem (deleteEvent)="deleteOffer($event)"></app-offer>
+</div>
+<button type="button" class="btn btn-success" routerLink="/addoffer">Add</button>
+<router-outlet></router-outlet>

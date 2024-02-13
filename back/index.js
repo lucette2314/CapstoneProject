@@ -53,6 +53,7 @@ app.post('/foods', function (req, res) {
     foodInfo.description = req.body.description;
     foodInfo.price = parseFloat(req.body.price);
 
+
     console.log(food)
     Food.create(food) //insert into () value
         .then(function (results) {

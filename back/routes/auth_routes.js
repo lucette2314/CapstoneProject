@@ -48,25 +48,25 @@ router.post('/login', function(req, res){
       }
     });
  
-module.exports = router;
+    module.exports = router;
  
  
-var upload = multer({storage: storage});
- 
-router.post('/addfood', upload.single('food_image'), function(req,res){
-    const foodData = req.body;
- 
-    if(req.file){
-        foodData.image = req.file.filename;
-    }
-})
-
-var upload = multer({storage: storage});
- 
-router.post('/adddrink', upload.single('drink_image'), function(req,res){
-    const drinkData = req.body;
- 
-    if(req.file){
-        drinkData.image = req.file.filename;
-    }
-})
+    var upload = multer({storage: storage});
+     
+    router.post('/addfood', upload.single('food_image'), function(req,res){
+        const foodData = req.body;
+     
+        if(req.file){
+            foodData.image = req.file.filename;
+        }
+    })
+    
+    var upload = multer({storage: storage});
+     
+    router.post('/adddrink', upload.single('drink_image'), function(req,res){
+        const drinkData = req.body;
+     
+        if(req.file){
+            drinkData.image = req.file.filename;
+        }
+    })
