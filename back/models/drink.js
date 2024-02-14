@@ -28,7 +28,7 @@ const Drinks = config.define('drinks', { //config.define(nombre de la tabla crea
     },
     image: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
 },
 

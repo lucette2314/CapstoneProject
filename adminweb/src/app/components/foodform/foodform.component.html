@@ -2,20 +2,23 @@
 <form [formGroup]="foodForm">
     <div class="mb-3">
       <label for="name" class="form-label">Name of Dish</label>
-      <input type="text"formControlName="name" class="form-control">
+      <input type="text" formControlName="name" class="form-control">
     </div>
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
-      <input type="text" formControlName="description"class="form-control">
+      <input type="text" formControlName="description" class="form-control">
     </div>
     <div class="mb-3">
         <label for="price" class="form-label">Price (CAD)</label>
-        <input type="number" formControlName="price"class="form-control">
+        <input type="number" formControlName="price" class="form-control">
     </div>
     <div class="mb-3">
         <label for="foodcategoryid" class="form-label">Category ID #</label>
         <input type="number" formControlName="food_category_id" class="form-control">
     </div>
+    <div>
+    <label for="image" class="form-label">Image</label>
+    <input type="file" accept="image/png, image/jpeg, image/jpg"></div>
     
     <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
   </form>

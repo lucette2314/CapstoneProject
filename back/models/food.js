@@ -27,7 +27,7 @@ const Foods = config.define('foods', { //config.define(nombre de la tabla creada
     },
     image: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
     },
 },
 

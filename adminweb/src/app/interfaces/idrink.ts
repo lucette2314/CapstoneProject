@@ -4,4 +4,5 @@ export interface Idrink {
     drink_category_id: Number;
     description: String;
     price: Number;
+    image: String;
 }

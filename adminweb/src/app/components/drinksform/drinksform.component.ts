@@ -22,7 +22,8 @@ constructor(private formBuilder: FormBuilder, private drinksService: DrinksServi
     name: [],
     description: [],
     price: [],
-    drink_category_id: []
+    drink_category_id: [],
+    image: []
   });
 
   const drinkId = this.route.snapshot.paramMap.get('drink_id');
@@ -62,5 +63,6 @@ updateDrink(){
 
 }
 }
+
 
 

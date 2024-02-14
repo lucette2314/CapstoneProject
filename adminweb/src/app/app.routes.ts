@@ -10,6 +10,7 @@ import { FoodformComponent } from './components/foodform/foodform.component';
 import { DrinksformComponent } from './components/drinksform/drinksform.component';
 import { OffersformComponent } from './components/offersform/offersform.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
+import { RegisterpageComponent } from './components/registerpage/registerpage.component';
 
 
 export const routes: Routes = [
@@ -23,7 +24,8 @@ export const routes: Routes = [
     {path: 'addfood', component: FoodformComponent},
     {path: 'adddrink', component: DrinksformComponent},
     {path: 'addoffer', component: OffersformComponent},
-    {path: 'loginpage', component: FoodComponent},
+    {path: 'login', component: LoginpageComponent},
+    {path: 'register', component: RegisterpageComponent},
     {path: 'editfood/:food_id', component: FoodformComponent},
     {path: 'editdrink/:drink_id', component: DrinksformComponent},
     {path: 'editoffer/:offer_id', component: OffersformComponent},

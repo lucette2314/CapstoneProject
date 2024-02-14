@@ -20,6 +20,9 @@ export class FoodsService {
   getFood(foodId: number){
     return this.http.get<Ifood>(`http://localhost:3000/foods/${foodId}`);
   }
+  updateFood(foodId: number, formData: any){
+    return this.http.patch<Ifood>(`http://localhost:3000/foods/${foodId}`,formData)
+  }
   deleteFood(foodId: number){
     return this.http.delete<Ifood>(`http://localhost:3000/foods/${foodId}`);
   }
