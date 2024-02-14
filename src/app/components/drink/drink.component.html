@@ -21,9 +21,13 @@
           </div>
         </div>
         <hr>
-        <ion-button class="cart" color="medium" (click)="presentAlert()">Add to Cart</ion-button>
+
+        <ion-button  class="cart" color="medium" (click)="addToCart(drink)">Add to Cart ({{ drink.quantity }})</ion-button>
+
       </ion-card-header>
     </ion-card>
-  </div>
 
+  </div>
 </ion-content>
+
+<ion-button [routerLink]="['/checkout']">View Cart</ion-button>

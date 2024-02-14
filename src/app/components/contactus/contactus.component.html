@@ -1,6 +1,4 @@
-<!-- contact-us.page.html -->
-
-<app-header pageTitle="Contact us"></app-header>
+<app-header pageTitle="Contact Us"></app-header>
 
 <ion-content [fullscreen]="true">
 
@@ -11,20 +9,23 @@
 
         <ion-list lines="none">
           <ion-item>
-            <ion-label position="stacked" class="input-label">First and Last Name</ion-label>
+            <ion-label position="stacked" aria-label="name" class="input-label">First and Last Name</ion-label>
             <hr>
+            <!-- Use ngModel to bind the 'name' property -->
             <ion-input [(ngModel)]="name" type="text" required class="input-field"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label position="stacked" class="input-label">Email address</ion-label>
+            <ion-label position="stacked" aria-label="email"class="input-label">Email address</ion-label>
             <hr>
+            <!-- Use ngModel to bind the 'email' property -->
             <ion-input [(ngModel)]="email" type="email" required class="input-field"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label position="stacked" class="input-label">Message</ion-label>
+            <ion-label position="stacked" aria-label="message" class="input-label">Message</ion-label>
             <hr>
+            <!-- Use ngModel to bind the 'message' property -->
             <ion-textarea [(ngModel)]="message" required class="textarea-field"></ion-textarea>
           </ion-item>
         </ion-list>
@@ -37,3 +38,4 @@
   </ion-content>
 
 </ion-content>
+

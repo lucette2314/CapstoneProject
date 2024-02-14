@@ -1,6 +1,7 @@
 <app-header pageTitle="Food Menu"></app-header>
 
 <ion-content class="ion-content-centered" [fullscreen]="true">
+  
   <div *ngFor="let food of foods" class="ion-card-container">
     <ion-card style="height: auto;" color="light">
       <div class="heart-icon">&#9825;</div>
@@ -21,10 +22,13 @@
           </div>
         </div>
         <hr>
-        <ion-button class="cart" color="medium" (click)="presentAlert()">Add to Cart</ion-button>
+
+        <ion-button  class="cart" color="medium" (click)="addToCart(food)">Add to Cart ({{ food.quantity }})</ion-button>
+
       </ion-card-header>
     </ion-card>
+
   </div>
 </ion-content>
 
-
+<ion-button [routerLink]="['/checkout']">View Cart</ion-button>

@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { Idrink } from '../interfaces/idrink';
 import { HttpClient } from '@angular/common/http';
 import { Idrinkcategory } from '../interfaces/idrinkcategory';
-
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DrinkService {
+  private selectedDrinksSubject: BehaviorSubject<Idrink[]> = new BehaviorSubject<Idrink[]>([]);
 
+  selectedDrinks$: Observable<Idrink[]> = this.selectedDrinksSubject.asObservable();
   constructor(private http: HttpClient) { }
 
   getDrinks(){
@@ -28,5 +30,19 @@ export class DrinkService {
   }
   getProfile(){
     return this.http.get<Idrink>('http://localhost:3000/foods/profile');
+  }
+  addToSelectedDrinks(drink: Idrink) {
+    const selectedDrinks = this.selectedDrinksSubject.value;
+    selectedDrinks.push(drink);
+    this.selectedDrinksSubject.next(selectedDrinks);
+  }
+
+  clearSelectedDrinks() {
+    this.selectedDrinksSubject.next([]);
+  }
+
+  // Optionally, you can expose a method to retrieve the current selected foods array
+  getSelectedDrinks(): Idrink[] {
+    return this.selectedDrinksSubject.value;
   }
 }

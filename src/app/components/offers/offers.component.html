@@ -5,7 +5,7 @@
   <ion-list *ngFor="let offer of offers" class="offer-list">
    
     <ion-card class="offer-item" button [routerLink]="['/offer-details', offer.id]">
-      <ion-card-header class="offer-header" [ngStyle]="{ 'background-color': getRandomColor() }">
+      <ion-card-header class="offer-header">
         <ion-card-title class="offer-title">{{ offer.title }}</ion-card-title>
       </ion-card-header>
     

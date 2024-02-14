@@ -19,10 +19,9 @@ import { heartOutline } from 'ionicons/icons';
   standalone: true,
   imports: [RouterLink, IonLabel, IonItem, HeaderComponent, IonContent, IonInput, IonIcon, IonButton, IonCardContent, IonCard, IonCardSubtitle, CommonModule, IonCardHeader, IonCardTitle], 
 })
-export class FoodComponent implements OnInit{
- addIcons = { heartOutline};
+export class FoodComponent implements OnInit {
+  addIcons = { heartOutline };
  
-  food: any;
   public foods!: Ifood[];
   profile!: Ifood;
   profile_image!: File;
@@ -33,16 +32,14 @@ export class FoodComponent implements OnInit{
     { id: 4, name: 'Pasta' },
     { id: 5, name: 'Wings' },
     { id: 6, name: 'Steaks' },
-    { id: 7, name: 'Desserts' },
-    { id: 8, name: 'Burgers' },
-
+    { id: 7, name: 'Desserts' }
   ];
+
   constructor(private foodService: FoodService, private alertController: AlertController, private router: Router) { 
     this.getFood();
   }
 
   ngOnInit() {
-
     this.foodService.getFoods().subscribe((foods: any[]) => {
       this.foods = foods.map(food => ({ ...food, quantity: 1 }));
     });
@@ -51,7 +48,7 @@ export class FoodComponent implements OnInit{
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Add Food',
-      message: 'Your Food has being added successfully',
+      message: 'Your Food has been added successfully',
       buttons: ['Ok'],
     });
 
@@ -63,13 +60,16 @@ export class FoodComponent implements OnInit{
       this.foods = results;
     });
   }
+
   getCategoryName(categoryId: number): string {
     const category = this.foodcategories.find(cat => cat.id === categoryId);
     return category ? category.name : 'Unknown Category';
   }
+
   onFileSelected(event: any) {
     this.profile_image = event.target.files[0];
   }
+
   register() {
     let formData = new FormData();
 
@@ -81,12 +81,22 @@ export class FoodComponent implements OnInit{
         this.profile = result;
     });
   }
-    increaseQuantity(food: any) {
-      food.quantity += 1;
+
+  increaseQuantity(food: any) {
+    food.quantity += 1;
+  }
+
+  decreaseQuantity(food: any) {
+    if (food.quantity > 1) {
+      food.quantity -= 1;
     }
-  
-    decreaseQuantity(food: any) {
-      if (food.quantity > 1) {
-        food.quantity -= 1;
-      }
-}}
+  }
+  addToCart(food: any) {
+    this.foodService.addToSelectedFoods(food);
+  }
+  goToCheckout() {
+    // Pass the selected foods to the checkout page (you might want to store this information in a service)
+    this.router.navigate(['/checkout']);
+  }
+
+}

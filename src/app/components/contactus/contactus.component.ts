@@ -14,7 +14,8 @@ import { FormsModule } from '@angular/forms';
   imports: [RouterLink, FormsModule, IonLabel, IonItem, HeaderComponent, IonContent, IonButton, IonTextarea, IonHeader, IonToolbar, IonTitle, IonInput, CommonModule, IonList, IonCardContent, 
             IonCard], 
 })
-export class ContactusComponent implements OnInit{
+
+export class ContactusComponent implements OnInit {
 
   name: string = "";
   email: string = "";
@@ -22,15 +23,19 @@ export class ContactusComponent implements OnInit{
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('Component initialized');
+  }
+
+  ionViewDidEnter() {
+    console.log('Page entered');
+  }
 
   sendMessage() {
-
-    // Implement your logic to send the message
     console.log('Name:', this.name);
     console.log('Email:', this.email);
     console.log('Message:', this.message);
-
+  
     // Reset form fields after sending the message
     this.resetForm();
   }
@@ -41,4 +46,5 @@ export class ContactusComponent implements OnInit{
     this.message = '';
   }
 }
+
   

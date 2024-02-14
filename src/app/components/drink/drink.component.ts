@@ -31,7 +31,7 @@ export class DrinkComponent  implements OnInit {
     { id: 4, name: 'Smoothies and Shakes' },
   ];
 
-  constructor(private drinkService: DrinkService, private alertController: AlertController) { 
+  constructor(private drinkService: DrinkService, private alertController: AlertController, private router: Router) { 
     this.getDrink();
   }
 
@@ -83,4 +83,12 @@ export class DrinkComponent  implements OnInit {
       if (food.quantity > 1) {
         food.quantity -= 1;
       }
-}}
+}
+addToCart(drink: any) {
+  this.drinkService.addToSelectedDrinks(drink);
+}
+goToCheckout() {
+  // Pass the selected foods to the checkout page (you might want to store this information in a service)
+  this.router.navigate(['/checkout']);
+}
+}
