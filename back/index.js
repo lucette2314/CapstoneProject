@@ -10,7 +10,7 @@ const DrinkCategory = require('./models/drink_categories.js');
 const Review = require('./models/reviews.js');
 const EmployeeLogin = require('./models/employee_login.js');
 const authRoutes = require('./routes/auth_routes'); 
-
+const Contactus = require('./models/contactus.js');
 
 app.use(cors());
 app.use(express.json())
@@ -25,6 +25,44 @@ config.authenticate()
     .catch(function (error) {
         console.log(error)
     })
+
+app.post('/contactus', function (req, res) {
+    let contactus = req.body;
+    let contactusInfo = {};
+
+    contactusInfo.name = req.body.name;
+    contactusInfo.date = req.body.date;
+    contactusInfo.message = req.body.message;
+
+    console.log(contactus)
+    Contactus.create(contactus) //insert into () value
+        .then(function (results) {
+            res.status(200).send(results);
+        })
+        .catch(function (error) {
+            res.status(500).send(error);
+        })
+})
+
+app.post('/reviews', function (req, res) {
+    let reviews = req.body;
+    let reviewsInfo = {};
+
+    reviewsInfo.first_name = req.body.first_name;
+    reviewsInfo.last_name = req.body.last_name;
+    reviewsInfo.date = req.body.date;
+    reviewsInfo.rating = req.body.rating;
+    reviewsInfo.comments = req.body.comments;
+
+    console.log(reviews)
+    Review.create(reviews) //insert into () value
+        .then(function (results) {
+            res.status(200).send(results);
+        })
+        .catch(function (error) {
+            res.status(500).send(error);
+        })
+})
 
 app.post('/employee_login', function (req, res) {
     let employee_login = req.body;
