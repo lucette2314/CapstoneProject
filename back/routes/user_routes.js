@@ -4,6 +4,7 @@ const verifyToken = require('../middlewares/authMiddleware');
 const Foods = require('../models/foods');
 const Drinks = require('../models/drinks');
 
+
 router.get('/profile', verifyToken, function(req, res){
     const foodId = req.foodId;
 

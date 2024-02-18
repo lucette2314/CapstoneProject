@@ -55,7 +55,7 @@ const foodId = this.route.snapshot.paramMap.get('food_id');
     formData.append(key, this.foodForm.value[key]);
   }
 
-    this.foodsService.createFood(this.foodForm.value).subscribe({
+    this.foodsService.createFood(formData).subscribe({
       next: (result) => {
         alert ('Food item was created successfully');
         this.router.navigate(['/foods/']);
@@ -73,9 +73,9 @@ const foodId = this.route.snapshot.paramMap.get('food_id');
   }}
   
 createFood(){
-  const formData = this.foodForm.value;
+ const formData = this.foodForm.value;
   this.foodsService.createFood(formData).subscribe((result) => {
-    console.log(result);
+   console.log(result);
     alert("Food item was added successfully");
     this.foodForm.reset();
   });

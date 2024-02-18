@@ -18,7 +18,7 @@
     </div>
     <div>
     <label for="image" class="form-label">Image</label>
-    <input type="file" accept="image/png, image/jpeg, image/jpg"></div>
+    <input class ="form-control" type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg, image/jpg"></div>
     
     <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
   </form>

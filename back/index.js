@@ -11,6 +11,8 @@ const Review = require('./models/reviews.js');
 const EmployeeLogin = require('./models/employee_login.js');
 const authRoutes = require('./routes/auth_routes'); 
 const Contactus = require('./models/contactus.js');
+const multer = require('multer');
+
 
 app.use(cors());
 app.use(express.json())
@@ -82,7 +84,18 @@ app.post('/employee_login', function (req, res) {
         })
 })
 
-app.post('/foods', function (req, res) {
+var upload = multer({storage: storage});
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './uploads')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+  });
+
+app.post('/foods', upload.single('food_image'), function (req, res) {
     let food = req.body;
     let foodInfo = {};
     console.log(food);
@@ -90,6 +103,9 @@ app.post('/foods', function (req, res) {
     foodInfo.food_category = req.body.food_category;
     foodInfo.description = req.body.description;
     foodInfo.price = parseFloat(req.body.price);
+    if (req.file){
+        foodData.image = req.file.filename;
+    }
 
 
     console.log(food)

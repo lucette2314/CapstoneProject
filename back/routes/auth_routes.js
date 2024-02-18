@@ -33,7 +33,7 @@ router.post('/login', function(req, res){
                 return res.status(401).send('Authentification failed');
             }
  
-            const token = jwt.sign({userId:result.id}, '123456', {expiresIn: '2h'});
+            const token = jwt.sign({ userId: result.id }, '123456', {expiresIn: '2h'});
             res.status(200).send({token});
         });
     });
@@ -59,6 +59,12 @@ router.post('/login', function(req, res){
         if(req.file){
             foodData.image = req.file.filename;
         }
+
+        Food.create(foodData).then((result) => {
+            res.status(200).send(result);
+        }).catch((err) =>{
+            res.status(500).send(err);
+        })
     })
     
     var upload = multer({storage: storage});

@@ -11,10 +11,13 @@ import { DrinksformComponent } from './components/drinksform/drinksform.componen
 import { OffersformComponent } from './components/offersform/offersform.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RegisterpageComponent } from './components/registerpage/registerpage.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 
 export const routes: Routes = [
     {path: '', component: LoginpageComponent},
+    {path: 'home', component: HomepageComponent, canActivate: [AuthGuardService]},
     {path: 'food', component: FoodComponent},
     {path: 'foods', component: FoodsComponent},
     {path: 'drink', component: DrinkComponent},
