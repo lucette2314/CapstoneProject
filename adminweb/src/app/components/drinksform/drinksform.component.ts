@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DrinksService } from '../../services/drinks.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-drinksform',
@@ -15,9 +16,9 @@ export class DrinksformComponent {
 drinkForm: FormGroup;
 isEditMode: boolean = false;
 editDrinkId: number = 0;
+drink_image!: File;
 
-
-constructor(private formBuilder: FormBuilder, private drinksService: DrinksService, private route: ActivatedRoute){
+constructor(private formBuilder: FormBuilder, private drinksService: DrinksService, private route: ActivatedRoute, private router: Router){
   this.drinkForm = formBuilder.group({
     name: [],
     description: [],
@@ -36,8 +37,33 @@ constructor(private formBuilder: FormBuilder, private drinksService: DrinksServi
     });
   }
   }
+
+  onFileSelected(event: any){
+    this.drink_image = event.target.files[0];
+  }
+
   onSubmit(){
-   
+    let formData = new FormData();
+
+    if (this.drink_image){
+      formData.append('drink_image', this.drink_image)}
+        
+  for (let key in this.drinkForm.value){
+    formData.append(key, this.drinkForm.value[key]);
+  }
+
+    this.drinksService.createDrink(formData).subscribe({
+      next: (result) => {
+        alert ('Food item was created successfully');
+        this.router.navigate(['/foods/']);
+      },
+      error: (err) => {
+        console.log(err);
+        alert('Food item creation failed');
+      }
+    });
+
+
     if(this.isEditMode){
       this.updateDrink();
     }else {

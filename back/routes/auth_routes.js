@@ -75,4 +75,10 @@ router.post('/login', function(req, res){
         if(req.file){
             drinkData.image = req.file.filename;
         }
+
+        Drink.create(drinkData).then((result) => {
+            res.status(200).send(result);
+        }).catch((err) =>{
+            res.status(500).send(err);
+        })
     })

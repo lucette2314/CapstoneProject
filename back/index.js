@@ -12,7 +12,7 @@ const EmployeeLogin = require('./models/employee_login.js');
 const authRoutes = require('./routes/auth_routes'); 
 const Contactus = require('./models/contactus.js');
 const multer = require('multer');
-
+const upload = multer({ dest: './uploads' });
 
 app.use(cors());
 app.use(express.json())
@@ -84,7 +84,7 @@ app.post('/employee_login', function (req, res) {
         })
 })
 
-var upload = multer({storage: storage});
+// var upload = multer({storage: storage});
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -100,16 +100,18 @@ app.post('/foods', upload.single('food_image'), function (req, res) {
     let foodInfo = {};
     console.log(food);
     foodInfo.name = req.body.name;
-    foodInfo.food_category = req.body.food_category;
+    foodInfo.food_category_id = req.body.food_category_id;
     foodInfo.description = req.body.description;
     foodInfo.price = parseFloat(req.body.price);
+
     if (req.file){
-        foodData.image = req.file.filename;
+        foodInfo.image = req.file.filename;
     }
 
 
-    console.log(food)
-    Food.create(food) //insert into () value
+    console.log('Uploaded file:', req.file);
+    
+    Food.create(foodInfo) //insert into () value
         .then(function (results) {
             res.status(200).send(results);
         })
@@ -118,17 +120,21 @@ app.post('/foods', upload.single('food_image'), function (req, res) {
         })
 })
 
-app.post('/drinks', function (req, res) {
+app.post('/drinks', upload.single('drink_image'), function (req, res) {
     let drink = req.body;
     let drinkInfo = {};
-
+    console.log(drink);
     drinkInfo.name = req.body.name;
-    drinkInfo.drink_category = req.body.drink_category;
+    drinkInfo.drink_category_id = req.body.drink_category_id; //drink_category_id instead of drink_category   ...mel
     drinkInfo.description = req.body.description;
     drinkInfo.price = parseFloat(req.body.price);
 
-    console.log(drink)
-    Drink.create(drink) //insert into () value
+    if (req.file){
+        drinkInfo.image = req.file.filename;
+    }
+    console.log('Uploaded file:', req.file); //mel
+
+    Drink.create(drinkInfo) //change (drink) to (drinkInfo) ... mel
         .then(function (results) {
             res.status(200).send(results);
         })
