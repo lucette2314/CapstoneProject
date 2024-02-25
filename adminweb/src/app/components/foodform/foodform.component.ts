@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FoodsService } from '../../services/foods.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { Ifoodcategory} from '../../interfaces/ifoodcategory';
+import { FoodcategoryService } from '../../services/foodcategory.service';
 
 
 @Component({
@@ -18,79 +19,77 @@ foodForm: FormGroup;
 isEditMode: boolean = false;
 editFoodId: number = 0
 food_image!: File;
+categories!: Ifoodcategory[];
+food_category_id!: number;
+title: string = "Add New Food";
 
-constructor(private formBuilder: FormBuilder, private foodsService: FoodsService, private router: Router, private route: ActivatedRoute){
-this.foodForm = formBuilder.group({
-  name: [],
-  description: [],
-  price: [],
-  food_category_id: [],
-  image: []
+constructor(private formBuilder: FormBuilder,
+  private foodsService: FoodsService,
+  private router: Router,
+  private route: ActivatedRoute,
+  private foodcategoryService: FoodcategoryService){
 
+  this.foodcategoryService.getcategory().subscribe(results => {
+    this.categories = results;
 });
 
-const foodId = this.route.snapshot.paramMap.get('food_id');
-  if(foodId){
-    console.log('Edit Mode');
-    this.isEditMode = true;
-    this.editFoodId = parseInt(foodId);
+this.foodForm = formBuilder.group({
+  name: [""],
+  description: [""],
+  price: [""],
+  food_category_id: [""],
+  image: []
+});
+this.validateEditmode();
+}
 
-    this.foodsService.getFood(this.editFoodId).subscribe(result => {
-      this.foodForm.patchValue(result);
-    });
-  }}
+  validateEditmode() {
+    let id = this.route.snapshot.paramMap.get("food_id");
+   
+      if(id){
+        console.log("id", id)
+      this.isEditMode = true;
+      this.title = "Edit Food"
+      this.editFoodId = parseInt (id);
+      //Fetch edit student
+      this.foodsService.getFood(this.editFoodId).subscribe(result => {
+        this.foodForm.patchValue(result); //Populate web form with database data
+        console.log(result);
+      })
+    }
+  }
 
   onFileSelected(event: any){
     this.food_image = event.target.files[0];
   }
 
-  onSubmit(){
-    
-    let formData = new FormData();
+  onSubmit() {
+    if (this.isEditMode) {
+      const formDataUpdate = this.foodForm.value;
+      // Update Food
+      this.foodsService.updateFood(this.editFoodId, formDataUpdate).subscribe((result) => {
+        console.log(result);
+        alert('Food was updated successfully');
+        this.router.navigate(["/foods"]); 
+      });
+    } else {
+      const formDataCreate = new FormData();
+      // Append individual form controls to formDataCreate
+      formDataCreate.append('name', this.foodForm.get('name')!.value || ''); // Provide a default empty string if value is null
+      formDataCreate.append('description', this.foodForm.get('description')!.value || ''); // Provide a default empty string if value is null
+      formDataCreate.append("price", this.foodForm.get("price")!.value || 0);
+      formDataCreate.append('food_category_id', this.foodForm.get('food_category_id')!.value);
 
-    if (this.food_image){
-      formData.append('food_image', this.food_image)}
-        
-  for (let key in this.foodForm.value){
-    formData.append(key, this.foodForm.value[key]);
-  }
-
-    this.foodsService.createFood(formData).subscribe({
-      next: (result) => {
-        alert ('Food item was created successfully');
-        this.router.navigate(['/foods/']);
-      },
-      error: (err) => {
-        console.log(err);
-        alert('Food item creation failed');
+      if (this.food_image) {
+        formDataCreate.append('food_image', this.food_image);
       }
-    });
-   
-    if(this.isEditMode){
-     this.updateFood();
-   }else {
-   this.createFood();
-  }}
   
-createFood(){
- const formData = this.foodForm.value;
-  this.foodsService.createFood(formData).subscribe((result) => {
-   console.log(result);
-    alert("Food item was added successfully");
-    this.foodForm.reset();
-  });
-}
-
-updateFood(){
-  const formData = this.foodForm.value;
-  this.foodsService.updateFood(this.editFoodId, formData).subscribe((result) => {
-    console.log(result);
-    alert("Food item was updated successfully");
-    this.foodForm.reset();
-  });
-}
-
-get nameFormControl(){
-  return this.foodForm.get('name')!;
-}
-}
+      // Create Food
+      this.foodsService.createFood(formDataCreate).subscribe((result) => {
+        console.log(result);
+        alert('Food was created successfully');
+        this.foodForm.reset(); // Clear web form data
+        this.router.navigate(['/foods']);
+      });
+    }
+  }}

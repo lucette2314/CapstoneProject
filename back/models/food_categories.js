@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 const config = require('./../config');
+const Foods = require('./food');
 
 const FoodCategories = config.define('food_categories', { //config.define(nombre de la tabla creada en heidi)
     
@@ -12,8 +13,13 @@ const FoodCategories = config.define('food_categories', { //config.define(nombre
     category: {
         type: Sequelize.STRING,
         allowNull: false,
+        references: {
+            model: 'food_categories',
+            key: 'id',
+        },
     }
 },{
     timestamps: false
 })
+
 module.exports = FoodCategories;

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Ifood } from '../interfaces/ifood';
+import { Ifoodcategory } from '../interfaces/ifoodcategory';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,6 @@ export class FoodsService {
   getFoods(){
     return this.http.get<Ifood[]>('http://localhost:3000/foods')
   }
-
   createFood(formData: any){
     return this.http.post<Ifood>('http://localhost:3000/foods', formData);
   }

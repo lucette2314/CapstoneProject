@@ -1,4 +1,48 @@
-.card{
-    width: 50%;
-    margin: auto;
-}
+  button {
+    font-size: 20px; /* Adjust the font size as needed */
+    padding: 1px 20px; /* Adjust the padding as needed */
+
+  }
+
+  img {
+    width: 500px; /* Set a fixed width for consistent size */
+    height: 300px; /* Set a fixed height for consistent size */
+    object-fit: cover;
+  }
+  
+
+  thead{
+    font-size: 22px;
+    font-style: italic;
+    text-align: center;
+  }
+
+
+  .food-name {
+    font-size: 50px; /* Adjust the font size for the food name */
+    font-weight: bold; /* Optional: Make the font bold */
+    color:cornflowerblue;
+  }
+
+  td{
+    font-size: 30px;
+  }
+  
+  td.description {
+    column-width: 200px; /* Set the desired width for the description column */
+  }
+  
+  td.foodcat {
+    column-width: 500px; /* Set the desired width for the foodcat column */
+  }
+
+  td.price {
+    column-width: 200px; /* Set the desired width for the description column */
+  }
+  
+  td.image {
+    column-width: 500px; /* Set the desired width for the foodcat column */
+  }
+  td.name {
+    column-width: 500px; /* Set the desired width for the foodcat column */
+  }

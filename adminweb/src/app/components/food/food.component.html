@@ -1,21 +1,40 @@
-<div class="d-flex justify-content-center">
-    <div class="col-md-4 mb-3">
-<div class="card" style="width: 18rem;">
-  <img [src] ="'http://localhost:3000/uploads/' + food.image">
-    <div class="card-body">
-      <h5 class="card-title">{{ food.name }}</h5>
-      <p class="card-text">{{  food.description }}</p>
+<button type="button" class="btn btn-success" routerLink="/addfood">Add Food</button>
+<div class="col-md-6">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <h5 class="card-title food-name">{{ food.name }}</h5>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-primary me-2" [routerLink]="['/editfood', food.id]">Edit</button>
+        <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+      </div>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item"> ${{ food.price }}</li>
-      <li class="list-group-item"> Category ID: {{ food.food_category_id }}</li>
-    </ul>
-    <div class="card-body">
-      <button class="btn btn-primary me-2" [routerLink]="['/editfood', food.id]">Edit</button>
-      <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+    <br>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead class="columnas">
+          <tr>
+            <th class="description">Description</th>
+            <th class="foodcat">Food Category</th>
+            <th class="price">Price</th>
+            <th class="image">Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ food.description }}</td>
+            <td>{{ food.foodcategory?.category }}</td>
+            <td>${{ food.price }}</td>
+            <td>
+              <div class="image-container">
+                <img [src]="'http://localhost:3000/uploads/' + food.image" alt="Food Image" class="img-fluid">
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+</div>
 
-  </div>
-  </div>
-<router-outlet></router-outlet>

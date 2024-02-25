@@ -28,6 +28,7 @@ config.authenticate()
         console.log(error)
     })
 
+
 app.post('/contactus', function (req, res) {
     let contactus = req.body;
     let contactusInfo = {};
@@ -99,6 +100,7 @@ app.post('/foods', upload.single('food_image'), function (req, res) {
     let food = req.body;
     let foodInfo = {};
     console.log(food);
+
     foodInfo.name = req.body.name;
     foodInfo.food_category_id = req.body.food_category_id;
     foodInfo.description = req.body.description;
@@ -111,13 +113,14 @@ app.post('/foods', upload.single('food_image'), function (req, res) {
 
     console.log('Uploaded file:', req.file);
     
-    Food.create(foodInfo) //insert into () value
-        .then(function (results) {
-            res.status(200).send(results);
-        })
-        .catch(function (error) {
-            res.status(500).send(error);
-        })
+    Food.create(foodInfo)
+    .then(results => {
+      res.status(200).send(results);
+    })
+    .catch(error => {
+      console.error('Sequelize Error:', error);
+      res.status(500).send(error);
+    });  
 })
 
 app.post('/drinks', upload.single('drink_image'), function (req, res) {
@@ -293,25 +296,25 @@ app.delete('/drink_categories/:drink_categories_id', function (req, res) {
 app.patch('/foods/:foods_id', function (req, res) {
     let foods_id = parseInt(req.params.foods_id);
 
-    Food.findByPk(foods_id)
-        .then(function (results) {
-            if (results) {
-                results.name = req.body.name;
-                results.food_category_id = parseFloat(req.body.food_category_id);
-                results.description = req.body.description;
-                results.price = parseFloat(req.body.price);
-
-            } else {
-                res.status(404).send("food id is not found");
-            }
-            results.save() //update sql command against the database
-                .then(function (result) {
-                    res.status(200).send(result)
-                })
-                .catch(function (error) {
-                    res.status(500).send(error);
-                })
+Food.findByPk(foods_id)
+.then(function (results) {
+    if (results) {
+        results.name = req.body.name;
+        results.food_category_id = parseFloat(req.body.food_category_id);
+        results.description = req.body.description;
+        results.price = parseFloat(req.body.price);
+        results.image = req.body.image;
+    } else {
+        res.status(404).send("Food id is not found");
+    }
+    results.save() //update sql command against the database
+        .then(function (result) {
+            res.status(200).send(result)
         })
+        .catch(function (error) {
+            res.status(500).send(error);
+        })
+})
 
 })
 
@@ -509,9 +512,6 @@ app.get('/drink_categories', function (req, res) {
             res.status(500).send(error);
         })
 })
-
-
-
 
 
 
