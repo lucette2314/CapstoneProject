@@ -26,6 +26,14 @@ const Drinks = config.define('drinks', { //config.define(nombre de la tabla crea
         type: Sequelize.STRING,
         allowNull: false,
     },
+    drink_category_id: { //foreign key... mel
+        type: Sequelize.INTEGER,
+        references: {
+            model: 'drink_categories',
+            key: 'id',
+        },
+        allowNull: false,
+    },
     price: {
         type: Sequelize.FLOAT,
         allowNull: false,

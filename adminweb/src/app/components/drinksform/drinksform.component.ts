@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DrinksService } from '../../services/drinks.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Idrinkcategory } from '../../interfaces/idrinkcategory';
+import { DrinkcategoryService } from '../../services/drinkcategory.service';
 
 
 @Component({
@@ -13,82 +15,81 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './drinksform.component.css'
 })
 export class DrinksformComponent {
-drinkForm: FormGroup;
-isEditMode: boolean = false;
-editDrinkId: number = 0;
-drink_image!: File;
-
-constructor(private formBuilder: FormBuilder, private drinksService: DrinksService, private route: ActivatedRoute, private router: Router){
+  drinkForm!: FormGroup;
+  isEditMode: boolean = false;
+  editDrinkId: number = 0
+  drink_image!: File;
+  categories!: Idrinkcategory[];
+  drink_category_id!: number;
+  title: string = "Add New Drink";
+  
+  constructor(private formBuilder: FormBuilder,
+    private drinksService: DrinksService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private drinkcategoryService: DrinkcategoryService){
+  
+    this.drinkcategoryService.getcategory().subscribe(results => {
+      this.categories = results;
+  });
+  
   this.drinkForm = formBuilder.group({
-    name: [],
-    description: [],
-    price: [],
-    drink_category_id: [],
+    name: [""],
+    description: [""],
+    price: [""],
+    drink_category_id: [""],
     image: []
   });
-
-  const drinkId = this.route.snapshot.paramMap.get('drink_id');
-  if(drinkId){
-    console.log('Edit Mode');
-    this.isEditMode = true;
-    this.editDrinkId = parseInt(drinkId);
-    this.drinksService.getDrink(this.editDrinkId).subscribe(result => {
-      this.drinkForm.patchValue(result);
-    });
+  this.validateEditmode();
   }
-  }
-
-  onFileSelected(event: any){
-    this.drink_image = event.target.files[0];
-  }
-
-  onSubmit(){
-    let formData = new FormData();
-
-    if (this.drink_image){
-      formData.append('drink_image', this.drink_image)}
-        
-  for (let key in this.drinkForm.value){
-    formData.append(key, this.drinkForm.value[key]);
-  }
-
-    this.drinksService.createDrink(formData).subscribe({
-      next: (result) => {
-        alert ('Food item was created successfully');
-        this.router.navigate(['/foods/']);
-      },
-      error: (err) => {
-        console.log(err);
-        alert('Food item creation failed');
+  
+    validateEditmode() {
+      let id = this.route.snapshot.paramMap.get("drink_id");
+     
+        if(id){
+          console.log("id", id)
+        this.isEditMode = true;
+        this.title = "Edit Drink"
+        this.editDrinkId = parseInt (id);
+        //Fetch edit student
+        this.drinksService.getDrink(this.editDrinkId).subscribe(result => {
+          this.drinkForm.patchValue(result); //Populate web form with database data
+          console.log(result);
+        })
       }
-    });
-
-
-    if(this.isEditMode){
-      this.updateDrink();
-    }else {
-    this.createDrink();
-  }
-  }
-createDrink(){
-  const formData = this.drinkForm.value;
-  this.drinksService.createDrink(formData).subscribe((result) => {
-    console.log(result);
-    alert("Drink item was added successfully");
-    this.drinkForm.reset();
-  });
-}
-
-updateDrink(){
-  const formData = this.drinkForm.value;
-  this.drinksService.updateDrink(this.editDrinkId, formData).subscribe((result) => {
-    console.log(result);
-    alert("Drink item was updated successfully");
-    this.drinkForm.reset();
-  });
-
-}
-}
-
-
-
+    }
+  
+    onFileSelected(event: any){
+      this.drink_image = event.target.files[0];
+    }
+  
+    onSubmit() {
+      if (this.isEditMode) {
+        const formDataUpdate = this.drinkForm.value;
+        // Update Drink
+        this.drinksService.updateDrink(this.editDrinkId, formDataUpdate).subscribe((result) => {
+          console.log(result);
+          alert('Drink was updated successfully');
+          this.router.navigate(["/drinks"]); 
+        });
+      } else {
+        const formDataCreate = new FormData();
+        // Append individual form controls to formDataCreate
+        formDataCreate.append('name', this.drinkForm.get('name')!.value || ''); // Provide a default empty string if value is null
+        formDataCreate.append('description', this.drinkForm.get('description')!.value || ''); // Provide a default empty string if value is null
+        formDataCreate.append("price", this.drinkForm.get("price")!.value || 0);
+        formDataCreate.append('drink_category_id', this.drinkForm.get('drink_category_id')!.value);
+  
+        if (this.drink_image) {
+          formDataCreate.append('drink_image', this.drink_image);
+        }
+    
+        // Create Drink
+        this.drinksService.createDrink(formDataCreate).subscribe((result) => {
+          console.log(result);
+          alert('Drink was created successfully');
+          this.drinkForm.reset(); // Clear web form data
+          this.router.navigate(['/drinks']);
+        });
+      }
+    }}

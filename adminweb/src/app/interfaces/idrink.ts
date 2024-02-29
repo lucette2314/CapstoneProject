@@ -1,8 +1,11 @@
+import { Idrinkcategory } from "./idrinkcategory";
+
 export interface Idrink {
     id: Number;
     name: String;
-    drink_category_id: Number;
     description: String;
-    price: Number;
-    image: String;
+    price: Number
+    drink_category_id: Number;
+    drinkcategory?: Idrinkcategory;
+    image: string;
 }

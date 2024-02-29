@@ -1,0 +1,46 @@
+button {
+    font-size: 20px; 
+    padding: 1px 20px; 
+
+  }
+
+
+  img {
+    width: 500px; 
+    height: 300px; 
+    object-fit: cover;
+  }
+  
+
+  thead{
+    font-size: 22px;
+    font-style: italic;
+    text-align: center;
+  }
+
+
+  .food-name {
+    font-size: 50px; 
+    font-weight: bold; 
+    color:cornflowerblue;
+  }
+
+  td{
+    font-size: 30px;
+  }
+  
+  td.description {
+    column-width: 200px; 
+  }
+  
+  td.foodcat {
+    column-width: 500px; 
+  }
+
+  td.price {
+    column-width: 200px; 
+  }
+  
+  td.image {
+    column-width: 500px; 
+  }

@@ -141,10 +141,11 @@ app.post('/drinks', upload.single('drink_image'), function (req, res) {
         .then(function (results) {
             res.status(200).send(results);
         })
-        .catch(function (error) {
+        .catch(error => {
+            console.error('Sequelize Error:', error);
             res.status(500).send(error);
-        })
-})
+          });  
+      })
 
 app.post('/promotions', function (req, res) {
     let promotion = req.body;

@@ -1,12 +1,13 @@
   button {
-    font-size: 20px; /* Adjust the font size as needed */
-    padding: 1px 20px; /* Adjust the padding as needed */
+    font-size: 20px; 
+    padding: 1px 20px; 
 
   }
 
+
   img {
-    width: 500px; /* Set a fixed width for consistent size */
-    height: 300px; /* Set a fixed height for consistent size */
+    width: 500px; 
+    height: 300px; 
     object-fit: cover;
   }
   
@@ -19,8 +20,8 @@
 
 
   .food-name {
-    font-size: 50px; /* Adjust the font size for the food name */
-    font-weight: bold; /* Optional: Make the font bold */
+    font-size: 50px; 
+    font-weight: bold; 
     color:cornflowerblue;
   }
 
@@ -29,20 +30,17 @@
   }
   
   td.description {
-    column-width: 200px; /* Set the desired width for the description column */
+    column-width: 200px; 
   }
   
   td.foodcat {
-    column-width: 500px; /* Set the desired width for the foodcat column */
+    column-width: 500px; 
   }
 
   td.price {
-    column-width: 200px; /* Set the desired width for the description column */
+    column-width: 200px; 
   }
   
   td.image {
-    column-width: 500px; /* Set the desired width for the foodcat column */
-  }
-  td.name {
-    column-width: 500px; /* Set the desired width for the foodcat column */
+    column-width: 500px; 
   }

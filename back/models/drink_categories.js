@@ -12,6 +12,10 @@ const DrinkCategories = config.define('drink_categories', { //config.define(nomb
     category: {
         type: Sequelize.STRING,
         allowNull: false,
+        references: {
+            model: 'drink_categories',
+            key: 'id',
+        },
     }
 },{
     timestamps: false
