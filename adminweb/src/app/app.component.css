@@ -1,3 +1,38 @@
 .active{
     background-color: rgb(172, 100, 112);
 }
+
+li{
+    font-size: 25px;
+}
+
+/* Navigation bar styles */
+.navbar {
+    background-color: #333; /* Dark background color */
+}
+
+.navbar-brand {
+    color: #fff; /* Text color for the brand */
+    font-size: 28px; /* Adjust the font size */
+    font-weight: bold;
+}
+
+.navbar-toggler-icon {
+    border-color: #fff; /* Color of the toggler icon */
+}
+
+.nav-link {
+    color: #fff; /* Text color for the links */
+    font-size: 20px; /* Adjust the font size */
+}
+
+/* Active link styles */
+.nav-item.active .nav-link {
+    background-color: #555; /* Background color for active link */
+    border-radius: 5px; /* Rounded corners for active link */
+}
+
+/* Hover effect for links */
+.nav-link:hover {
+    color: #ccc; /* Text color on hover */
+}

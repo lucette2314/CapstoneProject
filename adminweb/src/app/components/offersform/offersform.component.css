@@ -1,0 +1,27 @@
+.container {
+    height: 50vh; /* Set the height to 100% of the viewport height */
+  }
+  
+  .container > div {
+    width: 50%; /* Set the width of the form container as needed */
+  }
+
+  h2 {
+    font-size: 3em; /* Adjust the font size as needed */
+    color:blueviolet
+  }
+  
+  label {
+    font-size: 1.8em; /* Adjust the font size as needed */
+    font-weight: bold;
+  }
+  
+  input,
+  select,
+  button {
+    font-size: 1.5em; /* Adjust the font size as needed */
+  }
+  .form-control {
+    width: 180%;
+  }
+  

@@ -1,0 +1,32 @@
+
+  .card-header,
+  .card-title,
+  .card-text {
+    font-size: 20px;
+  }
+  
+  .btn {
+    font-size: 18px; 
+    margin-right: 10px;
+  }
+  
+  .card-title {
+    font-size: 24px;
+    color: purple; 
+  }
+
+  .card-header {
+    font-size: 24px;
+    color: rgb(228, 55, 84); 
+    font-weight: bold;
+    font-style: italic;
+  }
+  
+  .card:nth-child(even) {
+    background-color: #f8f9fa; 
+  }
+  
+  .card:nth-child(odd) {
+    background-color: #ffffff; 
+  }
+  

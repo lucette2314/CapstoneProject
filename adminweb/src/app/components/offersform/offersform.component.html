@@ -1,25 +1,37 @@
-<form [formGroup]="offerForm">
+<br>
+<br>
+<div class="container d-flex flex-column align-items-center">
+  <div>
+    
+  <h2>Add Offer</h2>
 
+  <form [formGroup]="offerForm" class="w-50">
     <div class="mb-3">
-      <label for="name" class="form-label">Title of Offer</label>
+      <label for="title" class="form-label">Title of Offer</label>
       <input type="text" formControlName="title" class="form-control">
     </div>
+
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
-      <input type="text" formControlName="description"class="form-control">
+      <input type="text" formControlName="description" class="form-control">
     </div>
+
     <div class="mb-3">
-        <label for="discount" class="form-label">Discount(%)</label>
-        <input type="number" formControlName="discount"class="form-control">
+      <label for="discount" class="form-label">Discount (%)</label>
+      <input type="number" formControlName="discount" class="form-control">
     </div>
+
     <div class="mb-3">
-        <label for="valid_from" class="form-label">Valid From (Start Date)</label>
-        <input type="date" formControlName="valid_from" class="form-control">
+      <label for="valid_from" class="form-label">Valid From (Start Date)</label>
+      <input type="date" formControlName="valid_from" class="form-control">
     </div>
+
     <div class="mb-3">
-        <label for="valid_to" class="form-label">Valid To (End Date) </label>
-        <input type="date" formControlName="valid_to" class="form-control">
+      <label for="valid_to" class="form-label">Valid To (End Date) </label>
+      <input type="date" formControlName="valid_to" class="form-control">
     </div>
-    
+
     <button type="submit" class="btn btn-primary" (click)="onSubmit()">Submit</button>
   </form>
+</div>
+</div>
