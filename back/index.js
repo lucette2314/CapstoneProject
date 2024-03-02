@@ -326,9 +326,10 @@ app.patch('/drinks/:drinks_id', function (req, res) {
         .then(function (results) {
             if (results) {
                 results.name = req.body.name;
-                results.drink_category = req.body.drink_category;
+                results.drink_category_id = parseFloat(req.body.drink_category_id);
                 results.description = req.body.description;
                 results.price = parseFloat(req.body.price);
+                results.image = req.body.image;
 
             } else {
                 res.status(404).send("drink id is not found");

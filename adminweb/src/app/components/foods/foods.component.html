@@ -1,7 +1,8 @@
+<div class="container d-flex flex-column align-items-center">
 <div class="todo">
     <div class="col-md-9">
       <button type="button" class="btn btn-success" routerLink="/addfood">Add Food</button>
-
+    </div>
       <div *ngFor="let foodItem of foods">
         <app-food [food]="foodItem" (deleteEvent)="deleteFood($event)"></app-food>
       </div>

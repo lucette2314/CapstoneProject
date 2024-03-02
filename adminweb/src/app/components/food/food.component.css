@@ -4,7 +4,6 @@
 
   }
 
-
   img {
     width: 500px; 
     height: 300px; 
@@ -27,10 +26,13 @@
 
   td{
     font-size: 30px;
+    text-align: center;
+    vertical-align: middle; /* Align content vertically in the middle */
   }
   
   td.description {
     column-width: 200px; 
+    text-align: justify;
   }
   
   td.foodcat {
@@ -43,4 +45,11 @@
   
   td.image {
     column-width: 500px; 
+  }
+
+  .table {
+    margin-bottom: 0; /* Remove margin bottom for cleaner appearance */
+  }
+  .columnas {
+    text-align: center; /* Center column headers */
   }
